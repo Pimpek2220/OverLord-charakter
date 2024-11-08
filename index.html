@@ -30,6 +30,24 @@
             border-bottom: 2px solid #6a0dad;
             padding-bottom: 10px;
         }
+        .language-switch {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 15px;
+        }
+        .language-switch button {
+            background-color: #ffd700;
+            color: #1a1a1a;
+            border: none;
+            padding: 10px 20px;
+            margin-left: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .language-switch button:hover {
+            background-color: #e5c100;
+        }
         .character {
             margin-bottom: 30px;
             padding: 15px;
@@ -58,13 +76,26 @@
             margin: 5px 0;
         }
     </style>
+    <script>
+        function switchLanguage(lang) {
+            if (lang === 'pl') {
+                window.location.href = 'overlord_characters_page_pl.html';
+            } else if (lang === 'zh') {
+                window.location.href = 'overlord_characters_page_zh.html';
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="container">
+        <div class="language-switch">
+            <button onclick="switchLanguage('pl')">Polski</button>
+            <button onclick="switchLanguage('zh')">中文</button>
+        </div>
         <h1>Postacie z Overlord</h1>
-        <p>W pierwszym sezonie Ainz, dawniej znany jako Suzuki Satoru, zostaje uwięziony w świecie gry Yggdrasil po jego nagłym zamknięciu. Z początku Ainz bada nowe zasady tego świata, odkrywa, że jego moce i atrybuty zostały zachowane, a postacie NPC ożyły i zaczęły wykazywać własną wolę. Szybko zdaje sobie sprawę z konieczności utworzenia planu mającego na celu ochronę Grobowca Nazarick i podporządkowanie sobie otaczającego świata.
-        W drugim sezonie Ainz umacnia swoją władzę nad Nazarick, konfrontując się z różnymi siłami i frakcjami, w tym z Królestwem Re-Estize, Jasnym Królestwem i innymi grupami. Jego strategiczne działania i rosnący wpływ zaczynają budzić zainteresowanie i obawy wśród innych potęg.
-        Trzeci sezon ukazuje, jak Ainz staje się Królem Magów, rozszerza swoje terytorium i zdobywa uznanie jako niepokonany lider. Jego sojusze, intrygi i polityczne manewry są narzędziami do zwiększania dominacji i ustanowienia porządku, który zaspokoi jego cele i ambicje. Nowe wyzwania i przeciwnicy pojawiają się na jego drodze, ale Ainz, wspierany przez swoich lojalnych strażników, zmierza ku absolutnej hegemonii.</p>
+        <p>W pierwszym sezonie Ainz, dawniej znany jako Suzuki Satoru, zostaje uwięziony w świecie gry Yggdrasil po jego nagłym zamknięciu. Z początku Ainz bada nowe zasady tego świata, odkrywa, że jego moce i atrybuty zostały zachowane, a postacie NPC ożyły i zaczęły wykazywać własną wolę. Szybko zdaje sobie sprawę z konieczności utworzenia planu mającego na celu ochronę Grobowca Nazarick i podporządkowanie sobie otaczającego świata. W miarę rozwoju wydarzeń, Ainz staje przed wyzwaniami wynikającymi z interakcji z lokalnymi mocarstwami i różnymi frakcjami, które widzą w nim zagrożenie lub szansę.
+        W drugim sezonie Ainz umacnia swoją władzę nad Nazarick, konfrontując się z różnymi siłami i frakcjami, w tym z Królestwem Re-Estize, Jasnym Królestwem i innymi grupami. Jego strategiczne działania i rosnący wpływ zaczynają budzić zainteresowanie i obawy wśród innych potęg. Wprowadza plan mający na celu rozszerzenie wpływów Nazarick, testując lojalność swoich podwładnych i manipulując wydarzeniami z ukrycia.
+        Trzeci sezon ukazuje, jak Ainz staje się Królem Magów, rozszerza swoje terytorium i zdobywa uznanie jako niepokonany lider. Jego sojusze, intrygi i polityczne manewry są narzędziami do zwiększania dominacji i ustanowienia porządku, który zaspokoi jego cele i ambicje. Nowe wyzwania i przeciwnicy pojawiają się na jego drodze, ale Ainz, wspierany przez swoich lojalnych strażników, zmierza ku absolutnej hegemonii, pokazując swoje bezwzględne podejście do osiągania zamierzonych celów.</p>
 
         <div class="character">
             <h2>Ainz Ooal Gown</h2>
