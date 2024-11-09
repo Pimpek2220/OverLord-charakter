@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Overlord 角色介绍</title>
     <style>
-        /* 保持原始的 CSS 样式 */
         body {
-            font-family: 'Times New Roman', serif;
+            font-family: '新宋体', Arial, Verdana, serif;
             line-height: 1.6;
             background-color: #1a1a1a;
-            color: #b0b0b0;
+            color: #e0e0e0;
             margin: 0;
             padding: 0;
+            font-size: 18px;
         }
         .container {
             width: 95%;
@@ -89,7 +89,7 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .character:hover {
-            transform: scale(1.02);
+            transform: scale(1.05);
             box-shadow: 0 0 20px 10px rgba(153, 0, 0, 0.8);
         }
         .character img {
@@ -112,7 +112,6 @@
             padding: 10px;
             border-radius: 5px;
         }
-        /* 模态框样式 */
         .modal {
             display: none;
             position: fixed;
@@ -146,9 +145,35 @@
             text-decoration: none;
             cursor: pointer;
         }
+        @media (max-width: 768px) {
+            .container {
+                width: 100%;
+                padding: 10px;
+            }
+            .character {
+                margin-bottom: 20px;
+                padding: 10px;
+            }
+            .character img {
+                max-width: 100px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1, h2 {
+                font-size: 18px;
+            }
+            .dropdown-button {
+                padding: 8px 16px;
+            }
+        }
     </style>
     <script>
         function switchLanguage(lang) {
+            localStorage.setItem('preferredLanguage', lang);
             if (lang === 'pl') {
                 window.location.href = 'index.html';
             } else if (lang === 'zh') {
@@ -162,6 +187,13 @@
             }
         }
 
+        document.addEventListener('DOMContentLoaded', function() {
+            const preferredLanguage = localStorage.getItem('preferredLanguage');
+            if (preferredLanguage) {
+                switchLanguage(preferredLanguage);
+            }
+        });
+
         function openModal(imgSrc) {
             var modal = document.getElementById("imgModal");
             var modalImg = document.getElementById("modalImage");
@@ -173,6 +205,19 @@
             var modal = document.getElementById("imgModal");
             modal.style.display = "none";
         }
+
+        function searchCharacter() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let characters = document.getElementsByClassName('character');
+            for (let i = 0; i < characters.length; i++) {
+                let characterName = characters[i].getElementsByTagName('h2')[0].innerText.toLowerCase();
+                if (characterName.includes(input)) {
+                    characters[i].style.display = '';
+                } else {
+                    characters[i].style.display = 'none';
+                }
+            }
+        }
     </script>
 </head>
 <body>
@@ -182,156 +227,167 @@
     </div>
 
     <div class="container">
-        <h2 style="color: #ffd700; text-align: center;">角色</h2>
+        <h2 style="color: #ffd700; text-align: center;">角色介绍</h2>
         <div class="language-switch">
             <div class="dropdown">
                 <button class="dropdown-button">选择语言</button>
                 <div class="dropdown-content">
-                    <button onclick="switchLanguage('uk')">Українська</button>
-                    <button onclick="switchLanguage('pl')">Polski</button>
+                    <button onclick="switchLanguage('uk')">乌克兰语</button>
+                    <button onclick="switchLanguage('pl')">波兰语</button>
                     <button onclick="switchLanguage('zh')">中文</button>
-                    <button onclick="switchLanguage('de')">Deutsch</button>
-                    <button onclick="switchLanguage('en')">English</button>
+                    <button onclick="switchLanguage('de')">德语</button>
+                    <button onclick="switchLanguage('en')">英语</button>
                 </div>
             </div>
         </div>
+        <div style="text-align: center; margin-bottom: 20px;">
+            <input type="text" id="searchInput" placeholder="搜索角色..." onkeyup="searchCharacter()" style="padding: 10px; width: 50%; font-size: 16px; border-radius: 5px; border: 1px solid #ffd700;">
+        </div>
         <h1>Overlord 角色介绍</h1>
         <h3 style="color: #ffd700; font-style: italic; text-align: center;">什么是 Overlord？</h3>
-        <p class="highlighted">《Overlord》是由日本作家丸山くがね创作的精彩故事，后被改编为动画和漫画。故事发生在虚拟现实游戏《Yggdrasil》中，主角决定在游戏关闭前留在游戏中，却突然发现自己和整个公会都被转移到了一个未知的世界。</p>
+        <p class="highlighted">《Overlord》是日本作家丸山くがね创作的一部热血故事，后来被改编成动漫和漫画。故事发生在虚拟现实游戏《Yggdrasil》中，主角在游戏关闭前决定留下，却发现自己和整个公会被转移到了一个未知的世界。</p>
         <h3 style="color: #ffd700; font-style: italic; text-align: center;">第一季</h3>
-        <p class="highlighted">在第一季中，安兹（原名铃木悟）在《Yggdrasil》游戏突然关闭后被困在这个世界中。起初，安兹研究这个新世界的规则，并发现他的力量和属性得以保留，NPC 们也有了意识。他很快意识到，他必须制定计划来保护纳萨力克大坟墓并征服周围的世界。随着剧情的发展，安兹面临着来自与当地势力和派系互动所带来的各种挑战，这些势力和派系将他视为威胁或机遇。</p>
+        <p class="highlighted">在第一季中，安兹（原名铃木悟）在游戏《Yggdrasil》关闭后被困在了游戏世界中。他发现自己的力量和属性依然存在，而那些原本是NPC的角色也获得了意识。他很快意识到需要制定计划来保护纳萨力克大坟墓，并征服周围的世界。随着故事的发展，安兹面临来自各地势力和派系的挑战，这些势力或视他为威胁，或将其视为机会。</p>
         <h3 style="color: #ffd700; font-style: italic; text-align: center;">第二季</h3>
-        <p class="highlighted">在第二季中，安兹巩固了对纳萨力克的掌控，并与各个势力和派系对抗，包括雷斯提兹王国和圣王国。他的战略行动和不断增长的影响力引起了其他势力的关注和担忧。他制定了扩展纳萨力克影响力的计划，通过考验部下的忠诚，并在暗中操控事件来实现目标。</p>
+        <p class="highlighted">在第二季中，安兹巩固了他对纳萨力克的控制，并与各个势力和派系对抗，包括雷-艾斯提杰王国和圣王国。他的战略行动和日益增长的影响力引起了其他势力的注意和担忧。他实施了扩大纳萨力克影响力的计划，测试了部下的忠诚，并在幕后操纵事件。</p>
         <h3 style="color: #ffd700; font-style: italic; text-align: center;">第三季</h3>
-        <p class="highlighted">在第三季中，安兹成为了魔导王，扩大了自己的领土，并获得了作为无敌领袖的认可。他的联盟、阴谋和政治手段是加强统治的工具，并建立符合他目标的秩序。新的挑战和敌人接踵而至，但在忠诚的守护者们的支持下，安兹朝着绝对霸权迈进，展现了他在实现目标上的毫不妥协的态度。</p>
+        <p class="highlighted">在第三季中，安兹成为了魔导王，扩展了他的领土，并获得了不可战胜的领袖的认可。他通过结盟、阴谋和政治手段来加强统治，建立符合他目标的秩序。新的挑战和敌人不断出现，但在忠诚守护者的支持下，安兹朝着绝对霸权迈进，展现了他为实现目标而不妥协的态度。</p>
         <h3 style="color: #ffd700; font-style: italic; text-align: center;">第四季</h3>
-        <p class="highlighted">在第四季中，安兹作为公认的无可争议的统治者，继续扩展魔导国的影响力。他的政治阴谋和外交手段变得更加复杂，因为他加强了与邻国的关系，以及那些将他不断增长的力量视为威胁的敌人。安兹面临着新的内部和外部挑战，他努力保持纳萨力克的团结，并获得其他国家的支持和尊重。同时，新的秘密和古老的力量开始显现，这迫使安兹和他的忠诚守护者们做出决定，这些决定将决定整个世界的未来。</p>
+        <p class="highlighted">在第四季中，安兹作为公认的无可争议的统治者，继续扩大魔导国的影响力。他的政治阴谋和外交手段变得更加复杂，同时他加强了与邻国的关系，以及那些视他为威胁的势力。安兹面临着新的内部和外部挑战，努力保持纳萨力克的团结，并赢得其他国家的支持和尊重。与此同时，新的秘密和古老的力量开始浮现，迫使安兹和他的忠诚守护者们做出决定，决定整个世界的命运。</p>
 
         <div class="character">
             <h2>安兹·乌尔·恭</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Ainz_Anime_Updated.png" alt="安兹·乌尔·恭" onclick="openModal(this.src)">
-            <p><strong>性格：</strong>冷静，精于计算</p>
-            <p><strong>种族：</strong>亡灵</p>
-            <p><strong>头衔：</strong>魔导王</p>
-            <p>安兹是一位不朽的大魔法师，也是纳萨力克大坟墓的统治者。他拥有巨大的力量和资源，是一位擅长计划和预见的杰出领导者。</p>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Ainz_Anime_Updated.png" alt="安兹·乌尔·恭，纳萨力克地下大坟墓的亡灵统治者，身着标志性的黑色盔甲" onclick="openModal(this.src)">
+            <p><strong>性格：</strong> 冷静、善于算计</p>
+            <p><strong>种族：</strong> 亡灵</p>
+            <p><strong>头衔：</strong> 魔导王</p>
+            <p>安兹是一位不朽的大法师，也是纳萨力克地下大坟墓的统治者。他拥有巨大的力量和资源，使他成为一位善于计划和预见的卓越领袖。</p>
         </div>
 
         <div class="character">
             <h2>夏提雅·布拉德弗伦</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Shalltear_Anime_Updated.png" alt="夏提雅·布拉德弗伦" onclick="openModal(this.src)">
-            <p><strong>性格：</strong>狂热，不可预测</p>
-            <p><strong>种族：</strong>吸血鬼</p>
-            <p><strong>头衔：</strong>血战士</p>
-            <p>夏提雅是最强大的守护者之一，她崇拜并敬仰安兹。她以无情的性格和战斗中的不可预测性而闻名。</p>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Shalltear_Anime_Updated.png" alt="夏提雅·布拉德弗伦，身着红色华丽服饰的吸血鬼" onclick="openModal(this.src)">
+            <p><strong>性格：</strong> 狂热、不可预测</p>
+            <p><strong>种族：</strong> 吸血鬼</p>
+            <p><strong>头衔：</strong> 战斗女仆</p>
+            <p>夏提雅是最强大的守护者之一，崇拜并效忠于安兹。她以战斗中的残忍和不可预测性而闻名。</p>
         </div>
 
         <div class="character">
             <h2>雅儿贝德</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Albedo_Anime_Updated.png" alt="雅儿贝德" onclick="openModal(this.src)">
-            <p><strong>性格：</strong>忠诚，狂热</p>
-            <p><strong>种族：</strong>恶魔</p>
-            <p><strong>头衔：</strong>总守护者</p>
-            <p>雅儿贝德是守护者的总管，对安兹有着狂热的爱。她美丽、聪明，对她的主人极为忠诚。</p>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Albedo_Anime_Updated.png" alt="雅儿贝德，身穿白色礼服的恶魔，背后有黑色翅膀" onclick="openModal(this.src)">
+            <p><strong>性格：</strong> 忠诚、狂热</p>
+            <p><strong>种族：</strong> 恶魔</p>
+            <p><strong>头衔：</strong> 总管守护者</p>
+            <p>雅儿贝德是所有守护者的总管，深爱着安兹。她美丽、聪慧且对主人绝对忠诚。</p>
         </div>
 
         <div class="character">
             <h2>迪米乌哥斯</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Demiurge_Anime_Updated.png" alt="迪米乌哥斯" onclick="openModal(this.src)">
-            <p><strong>性格：</strong>聪明，理性</p>
-            <p><strong>种族：</strong>恶魔</p>
-            <p><strong>头衔：</strong>地狱火的创造者</p>
-            <p>迪米乌哥斯是最聪明的守护者之一，虽然战斗能力平平，但他卓越的战略思维和预见敌人行动的能力无人能及。</p>
-        </div>
-
-        <div class="character">
-            <h2>马雷</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Mare_Anime_Updated.png" alt="马雷" onclick="openModal(this.src)">
-            <p><strong>性格：</strong>害羞，小心</p>
-            <p><strong>种族：</strong>黑暗精灵</p>
-            <p><strong>头衔：</strong>自然之主</p>
-            <p>马雷是较小的兄弟，常穿女装。他拥有控制自然的有用能力，使他在防御战中至关重要。</p>
-        </div>
-
-        <div class="character">
-            <h2>雅乌拉</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Aura_Anime_Updated.png" alt="雅乌拉" onclick="openModal(this.src)">
-            <p><strong>性格：</strong>精力充沛，自信</p>
-            <p><strong>种族：</strong>黑暗精灵</p>
-            <p><strong>头衔：</strong>传奇的驯兽师</p>
-            <p>雅乌拉是姐姐，是驯兽师，常穿男装。她勇敢、精力充沛，擅长在战场上指挥协调行动。</p>
-        </div>
-
-        <div class="character">
-            <h2>克劳恩皮丝</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Cocytus_Anime_Updated.png" alt="克劳恩皮丝" onclick="openModal(this.src)">
-            <p><strong>性格：</strong>勇敢，坚持</p>
-            <p><strong>种族：</strong>昆虫王</p>
-            <p><strong>头衔：</strong>冰河的创造者</p>
-            <p>克劳恩皮丝是最强大的守护者之一，拥有巨大的力量，并尊重他的对手。他可以调整战略以确保胜利。</p>
-        </div>
-
-        <div class="character">
-            <h2>潘多拉的演员</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Pandora_Actor_Databook.png" alt="潘多拉的演员" onclick="openModal(this.src)">
-            <p><strong>性格：</strong>忠诚，狡猾</p>
-            <p><strong>种族：</strong>多重变身者</p>
-            <p><strong>头衔：</strong>特种部队指挥官</p>
-            <p>潘多拉的演员是由安兹亲自创造的，拥有超凡的适应能力和变身为各种生物的能力。他对安兹忠诚无比，其任务是保护纳萨力克的秘密并执行特殊任务。</p>
-        </div>
-
-        <div class="character">
-            <h2>娜贝拉尔·伽马</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Narberal_Gamma_Profile.png" alt="娜贝拉尔·伽马" onclick="openModal(this.src)">
-            <p><strong>性格：</strong>冷酷，专业</p>
-            <p><strong>种族：</strong>多重变身者</p>
-            <p><strong>头衔：</strong>七姐妹之一</p>
-            <p>娜贝拉尔·伽马是纳萨力克的战斗女仆之一，也是七姐妹的忠诚成员。她以对人类的冷淡态度和卓越的魔法能力著称，是战斗中的绝佳支持。</p>
-        </div>
-
-        <div class="character">
-            <h2>尤莉·阿尔法</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Yuri_Alpha_V2.png" alt="尤莉·阿尔法" onclick="openModal(this.src)">
-            <p><strong>性格：</strong>负责任，冷静</p>
-            <p><strong>种族：</strong>亡灵</p>
-            <p><strong>头衔：</strong>七姐妹领袖</p>
-            <p>尤莉·阿尔法是七姐妹战斗女仆组的领袖。她的职责是协调团队的行动并维持秩序。她以纪律、忠诚和冷静的性格著称，是团队中的权威。</p>
-        </div>
-
-        <div class="character">
-            <h2>露普丝蕾琪娜·贝塔</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Lupusregina_Beta.png" alt="露普丝蕾琪娜·贝塔" onclick="openModal(this.src)">
-            <p><strong>性格：</strong>淘气，忠诚</p>
-            <p><strong>种族：</strong>狼人</p>
-            <p><strong>头衔：</strong>七姐妹之一</p>
-            <p>露普丝蕾琪娜·贝塔是七姐妹之一，以她淘气的性格著称，这常常掩盖了她对纳萨力克的真正忠诚和奉献。尽管个性顽皮，但她在执行任务时非常有效。</p>
-        </div>
-
-        <div class="character">
-            <h2>CZ2128 德尔塔</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/CZ_Profile_V2.png" alt="CZ2128 德尔塔" onclick="openModal(this.src)">
-            <p><strong>性格：</strong>安静，精准</p>
-            <p><strong>种族：</strong>自动人偶</p>
-            <p><strong>头衔：</strong>七姐妹狙击手</p>
-            <p>CZ2128 德尔塔是七姐妹中的一员，以射击为专长。</p>
-        </div>
-
-        <div class="character">
-            <h2>席尔特西亚·艾普西隆</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Solution_Epsilon_Profile.png" alt="席尔特西亚·艾普西隆" onclick="openModal(this.src)">
-            <p><strong>性格：</strong>狡猾，神秘</p>
-            <p><strong>种族：</strong>史莱姆</p>
-            <p><strong>头衔：</strong>七姐妹之一</p>
-            <p>席尔特西亚·艾普西隆是纳萨力克的战斗女仆之一，以她的渗透技能而著称。她擅长操纵对手并快速适应局势，是一个非常危险的对手。</p>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Demiurge_Anime_Updated.png" alt="迪米乌哥斯，身穿黑色西装的恶魔，面带微笑" onclick="openModal(this.src)">
+            <p><strong>性格：</strong> 狡猾、理性</p>
+            <p><strong>种族：</strong> 恶魔</p>
+            <p><strong>头衔：</strong> 地狱之炎的创造者</p>
+            <p>迪米乌哥斯是守护者中最具智慧的，尽管战斗能力一般，但他的战略思维和预判敌人的能力无人能及。</p>
         </div>
 
 
         <div class="character">
-    <h2>恩特玛·瓦西利萨·泽塔</h2>
-    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Solution_Epsilon_Profile.png" alt="席尔特西亚·艾普西隆" onclick="openModal(this.src)">
-    <p><strong>性格：</strong>忠诚，冷静</p>
-    <p><strong>种族：</strong>虫族</p>
-    <p><strong>头衔：</strong>星际团成员</p>
-    <p>恩特玛·瓦西利萨·泽塔是星际团的冷静且忠诚的成员。她的能力基于操控昆虫，这些昆虫被她用于战斗和间谍活动。尽管外表温和，她是一个危险的对手。</p>
-    </div>
+    <h2>玛雷·贝洛菲欧蕾</h2>
+    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Mare_Anime_Updated.png" alt="玛雷·贝洛菲欧蕾，身着绿色服饰的黑暗精灵，手持魔法杖" onclick="openModal(this.src)">
+    <p><strong>性格：</strong> 害羞、谨慎</p>
+    <p><strong>种族：</strong> 黑暗精灵</p>
+    <p><strong>头衔：</strong> 自然支配者</p>
+    <p>玛雷是黑暗精灵中的男孩，穿着女性的服装。他拥有操控自然的能力，是守护纳萨力克大坟墓的重要力量。</p>
+</div>
+
+        <div class="character">
+    <h2>雅乌拉·贝洛菲欧蕾</h2>
+    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Aura_Anime_Updated.png" alt="雅乌拉·贝洛菲欧蕾，穿着战斗服饰的黑暗精灵，充满活力" onclick="openModal(this.src)">
+    <p><strong>性格：</strong> 活泼、自信</p>
+    <p><strong>种族：</strong> 黑暗精灵</p>
+    <p><strong>头衔：</strong> 野兽训练师</p>
+    <p>雅乌拉是玛雷的姐姐，她擅长指挥战斗中的野兽，是一名优秀的野兽训练师和战地指挥官。</p>
+</div>
+
+
+        <div class="character">
+    <h2>科塞特斯</h2>
+    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Cocytus_Anime_Updated.png" alt="科塞特斯，拥有多个武器的昆虫战士" onclick="openModal(this.src)">
+    <p><strong>性格：</strong> 勇敢、坚定</p>
+    <p><strong>种族：</strong> 昆虫战士</p>
+    <p><strong>头衔：</strong> 冰河之主</p>
+    <p>科塞特斯是一名强大的战士，拥有惊人的力量和耐力，对敌人有着无尽的尊重和敬意。</p>
+</div>
+
+        <div class="character">
+    <h2>潘多拉·阿克特</h2>
+    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Pandora_Actor_Databook.png" alt="潘多拉·阿克特，身穿纳萨力克守卫制服的多重形态者" onclick="openModal(this.src)">
+    <p><strong>性格：</strong> 忠诚、狡猾</p>
+    <p><strong>种族：</strong> 多重形态者</p>
+    <p><strong>头衔：</strong> 特殊任务指挥官</p>
+    <p>潘多拉·阿克特是由安兹亲自创造的角色，具有变换形态的能力，负责保守纳萨力克的秘密和执行特殊任务。</p>
+</div>
+
+
+       <div class="character">
+    <h2>娜贝拉尔·伽玛</h2>
+    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Narberal_Gamma_Profile.png" alt="娜贝拉尔·伽玛，身穿女仆装的战斗女仆" onclick="openModal(this.src)">
+    <p><strong>性格：</strong> 冷酷、专业</p>
+    <p><strong>种族：</strong> 变形怪</p>
+    <p><strong>头衔：</strong> Pleiades成员</p>
+    <p>娜贝拉尔·伽玛是纳萨力克的战斗女仆之一，也是Pleiades的一员。她以对人类的冷酷态度和出色的魔法能力而闻名，是战斗中的重要辅助力量。</p>
+</div>
+
+        <div class="character">
+    <h2>尤莉·阿尔法</h2>
+    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Yuri_Alpha_V2.png" alt="尤莉·阿尔法，穿着严谨制服的女仆" onclick="openModal(this.src)">
+    <p><strong>性格：</strong> 负责、冷静</p>
+    <p><strong>种族：</strong> 不死族</p>
+    <p><strong>头衔：</strong> Pleiades队长</p>
+    <p>尤莉·阿尔法是Pleiades战斗女仆团队的队长。她负责团队的协调和管理，以纪律性和忠诚著称，是团队中的权威代表。</p>
+</div>
+
+
+        <div class="character">
+    <h2>露普丝蕾琪娜·贝塔</h2>
+    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Lupusregina_Beta.png" alt="露普丝蕾琪娜·贝塔，笑容满面的女仆" onclick="openModal(this.src)">
+    <p><strong>性格：</strong> 调皮、忠诚</p>
+    <p><strong>种族：</strong> 狼人</p>
+    <p><strong>头衔：</strong> Pleiades成员</p>
+    <p>露普丝蕾琪娜·贝塔是Pleiades的成员，以顽皮的性格著称，常常掩盖她对纳萨力克的真正忠诚。尽管她的个性顽皮，但在执行任务时非常高效。</p>
+</div>
+
+
+        <div class="character">
+    <h2>CZ2128·德尔塔</h2>
+    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/CZ_Profile_V2.png" alt="CZ2128·德尔塔，安静的女仆机器人" onclick="openModal(this.src)">
+    <p><strong>性格：</strong> 沉默、精准</p>
+    <p><strong>种族：</strong> 自动人偶</p>
+    <p><strong>头衔：</strong> Pleiades狙击手</p>
+    <p>CZ2128·德尔塔是Pleiades的成员，以射击技能出众。她沉稳冷静，是执行需要精准和镇定任务的理想人选。</p>
+</div>
+
+
+        <div class="character">
+    <h2>索留香·伊普西隆</h2>
+    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Solution_Epsilon_Profile.png" alt="索留香·伊普西隆，神秘的女仆" onclick="openModal(this.src)">
+    <p><strong>性格：</strong> 狡猾、神秘</p>
+    <p><strong>种族：</strong> 史莱姆</p>
+    <p><strong>头衔：</strong> Pleiades成员</p>
+    <p>索留香·伊普西隆是纳萨力克的战斗女仆之一，以出色的渗透能力和操控敌人的技能著称。她的狡猾让她成为令人畏惧的对手。</p>
+</div>
+
+
+
+        <div class="character">
+    <h2>恩多玛·瓦西莉萨·泽塔</h2>
+    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Entoma_Profile.png" alt="恩多玛·瓦西莉萨·泽塔，沉稳的女仆，操控昆虫" onclick="openModal(this.src)">
+    <p><strong>性格：</strong> 沉稳、忠诚</p>
+    <p><strong>种族：</strong> 昆虫类</p>
+    <p><strong>头衔：</strong> Pleiades成员</p>
+    <p>恩多玛·瓦西莉萨·泽塔是Pleiades的一员，擅长操控昆虫进行战斗和侦察。尽管外表平静，但她在战斗中是一个极具威胁的敌人。</p>
+</div>
+
 </body>
 </html>
