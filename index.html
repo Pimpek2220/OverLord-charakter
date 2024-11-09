@@ -31,22 +31,52 @@
             padding-bottom: 10px;
         }
         .language-switch {
+            position: relative;
             display: flex;
             justify-content: flex-end;
             margin-bottom: 15px;
         }
-        .language-switch button {
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-button {
             background-color: #ffd700;
             color: #1a1a1a;
             border: none;
             padding: 10px 20px;
-            margin-left: 10px;
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
         }
-        .language-switch button:hover {
+        .dropdown-button:hover {
             background-color: #e5c100;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #2a2a2a;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .dropdown-content button {
+            background-color: #ffd700;
+            color: #1a1a1a;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .dropdown-content button:hover {
+            background-color: #e5c100;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
         }
         .character {
             margin-bottom: 30px;
@@ -75,8 +105,13 @@
         .character p {
             margin: 5px 0;
         }
+        .highlighted {
+            border: 2px solid #ffd700;
+            padding: 10px;
+            border-radius: 5px;
+        }
     </style>
-        <script>
+    <script>
         function switchLanguage(lang) {
             if (lang === 'pl') {
                 window.location.href = 'overlord_characters_page_pl.html';
@@ -93,21 +128,23 @@
 <body>
      <div class="container">
         <div class="language-switch">
-            <button onclick="switchLanguage('uk')">Українська</button>
-            <button onclick="switchLanguage('pl')">Polski</button>
-            <button onclick="switchLanguage('zh')">中文</button>
-            <button onclick="switchLanguage('de')">Deutsch</button>
+            <div class="dropdown">
+                <button class="dropdown-button">Wybierz język</button>
+                <div class="dropdown-content">
+                    <button onclick="switchLanguage('uk')">Українська</button>
+                    <button onclick="switchLanguage('pl')">Polski</button>
+                    <button onclick="switchLanguage('zh')">中文</button>
+                    <button onclick="switchLanguage('de')">Deutsch</button>
+                </div>
+            </div>
         </div>
         <h1>Postacie z Overlord</h1>
-        <p>„Overlord” to powieść light novel stworzona przez japońskiego autora Kugane Maruyamę, która została zaadaptowana na anime i mangę. Historia rozgrywa się w wirtualnej rzeczywistości gry „Yggdrasil”, gdzie główny bohater, gracz, który postanawia zostać w grze tuż przed jej zamknięciem, niespodziewanie odkrywa, że on sam oraz cała siedziba jego gildii zostali przeniesieni do nieznanego świata.
-
-Główny bohater, Suzuki Satoru, jest przeciętnym pracownikiem biurowym w prawdziwym życiu, który w grze wciela się w potężnego nieumarłego władcę „Ainz Ooal Gown”, znanego również jako „Momon”. Postanawia odkryć nowy świat i stopniowo dąży do jego podboju. Towarzyszą mu wierni i niezwykle silni NPC słudzy, którzy po przeniesieniu zyskują świadomość, co sprawia, że historia pełna jest strategii, intryg i przygód.
-
-Fabuła „Overlord” opowiada o walkach Ainza w nowym świecie, jego starciach z innymi potęgami i jego rozwoju, eksplorując przy tym tematy związane z władzą, etyką i rządzeniem. Dzieło zyskało uznanie dzięki złożonemu światotworzeniu, dopracowanym postaciom i mrocznej fabule.
-        <p>W pierwszym sezonie Ainz, dawniej znany jako Suzuki Satoru, zostaje uwięziony w świecie gry Yggdrasil po jego nagłym zamknięciu. Z początku Ainz bada nowe zasady tego świata, odkrywa, że jego moce i atrybuty zostały zachowane, a postacie NPC ożyły i zaczęły wykazywać własną wolę. Szybko zdaje sobie sprawę z konieczności utworzenia planu mającego na celu ochronę Grobowca Nazarick i podporządkowanie sobie otaczającego świata. W miarę rozwoju wydarzeń, Ainz staje przed wyzwaniami wynikającymi z interakcji z lokalnymi mocarstwami i różnymi frakcjami, które widzą w nim zagrożenie lub szansę.</p>
-        <p>W drugim sezonie Ainz umacnia swoją władzę nad Nazarick, konfrontując się z różnymi siłami i frakcjami, w tym z Królestwem Re-Estize, Jasnym Królestwem i innymi grupami. Jego strategiczne działania i rosnący wpływ zaczynają budzić zainteresowanie i obawy wśród innych potęg. Wprowadza plan mający na celu rozszerzenie wpływów Nazarick, testując lojalność swoich podwładnych i manipulując wydarzeniami z ukrycia.</p>
-        <p>W trzeci sezon ukazuje, jak Ainz staje się Królem Magów, rozszerza swoje terytorium i zdobywa uznanie jako niepokonany lider. Jego sojusze, intrygi i polityczne manewry są narzędziami do zwiększania dominacji i ustanowienia porządku, który zaspokoi jego cele i ambicje. Nowe wyzwania i przeciwnicy pojawiają się na jego drodze, ale Ainz, wspierany przez swoich lojalnych strażników, zmierza ku absolutnej hegemonii, pokazując swoje bezwzględne podejście do osiągania zamierzonych celów.</p>
-        <p>W czwartym sezonie Ainz, teraz uznawany za niekwestionowanego władcę, kontynuuje swoje dążenie do rozszerzenia wpływów Imperium Sorcerer King. Jego polityczne intrygi i dyplomatyczne manewry stają się bardziej skomplikowane, gdy zacieśnia relacje z sąsiednimi królestwami i wrogami, którzy zaczynają dostrzegać jego rosnącą potęgę. Ainz mierzy się z nowymi wyzwaniami, zarówno wewnętrznymi, jak i zewnętrznymi, starając się zachować jedność Nazarick oraz zyskać poparcie i szacunek innych nacji. Tymczasem nowe tajemnice i starożytne siły zaczynają się ujawniać, zmuszając Ainza i jego lojalnych Strażników do podjęcia decyzji, które zadecydują o przyszłości całego świata.</p>
+        <p class="highlighted">„Overlord” to powieść light novel stworzona przez japońskiego autora Kugane Maruyamę, która została zaadaptowana na anime i mangę. Historia rozgrywa się w wirtualnej rzeczywistości gry „Yggdrasil”, gdzie główny bohater, gracz, który postanawia zostać w grze tuż przed jej zamknięciem, niespodziewanie odkrywa, że on sam oraz cała siedziba jego gildii zostali przeniesieni do nieznanego świata.
+        </p>
+        <p class="highlighted">W pierwszym sezonie Ainz, dawniej znany jako Suzuki Satoru, zostaje uwięziony w świecie gry Yggdrasil po jego nagłym zamknięciu. Z początku Ainz bada nowe zasady tego świata, odkrywa, że jego moce i atrybuty zostały zachowane, a postacie NPC ożyły i zaczęły wykazywać własną wolę. Szybko zdaje sobie sprawę z konieczności utworzenia planu mającego na celu ochronę Grobowca Nazarick i podporządkowanie sobie otaczającego świata. W miarę rozwoju wydarzeń, Ainz staje przed wyzwaniami wynikającymi z interakcji z lokalnymi mocarstwami i różnymi frakcjami, które widzą w nim zagrożenie lub szansę.</p>
+        <p class="highlighted">W drugim sezonie Ainz umacnia swoją władzę nad Nazarick, konfrontując się z różnymi siłami i frakcjami, w tym z Królestwem Re-Estize, Jasnym Królestwem i innymi grupami. Jego strategiczne działania i rosnący wpływ zaczynają budzić zainteresowanie i obawy wśród innych potęg. Wprowadza plan mający na celu rozszerzenie wpływów Nazarick, testując lojalność swoich podwładnych i manipulując wydarzeniami z ukrycia.</p>
+        <p class="highlighted">W trzeci sezon ukazuje, jak Ainz staje się Królem Magów, rozszerza swoje terytorium i zdobywa uznanie jako niepokonany lider. Jego sojusze, intrygi i polityczne manewry są narzędziami do zwiększania dominacji i ustanowienia porządku, który zaspokoi jego cele i ambicje. Nowe wyzwania i przeciwnicy pojawiają się na jego drodze, ale Ainz, wspierany przez swoich lojalnych strażników, zmierza ku absolutnej hegemonii, pokazując swoje bezwzględne podejście do osiągania zamierzonych celów.</p>
+        <p class="highlighted">W czwartym sezonie Ainz, teraz uznawany za niekwestionowanego władcę, kontynuuje swoje dążenie do rozszerzenia wpływów Imperium Sorcerer King. Jego polityczne intrygi i dyplomatyczne manewry stają się bardziej skomplikowane, gdy zacieśnia relacje z sąsiednimi królestwami i wrogami, którzy zaczynają dostrzegać jego rosnącą potęgę. Ainz mierzy się z nowymi wyzwaniami, zarówno wewnętrznymi, jak i zewnętrznymi, starając się zachować jedność Nazarick oraz zyskać poparcie i szacunek innych nacji. Tymczasem nowe tajemnice i starożytne siły zaczynają się ujawniać, zmuszając Ainza i jego lojalnych Strażników do podjęcia decyzji, które zadecydują o przyszłości całego świata.</p>
 
         <div class="character">
             <h2>Ainz Ooal Gown</h2>
