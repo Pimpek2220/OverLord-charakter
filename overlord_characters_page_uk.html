@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Персонажі з Overlord</title>
     <style>
-        /* Зберегти оригінальний CSS */
+     
         body {
             font-family: 'Times New Roman', serif;
             line-height: 1.6;
@@ -117,10 +117,10 @@
        
         localStorage.setItem('preferredLanguage', lang);
 
-       
+      
         const currentPath = window.location.pathname;
 
-       
+     
         let targetPage;
         switch (lang) {
             case 'pl':
@@ -149,13 +149,13 @@
     }
 
     document.addEventListener('DOMContentLoaded', function () {
-        
+  
         const preferredLanguage = localStorage.getItem('preferredLanguage');
         
-       
+      
         const currentPageLang = document.documentElement.lang;
 
-       
+     
         if (preferredLanguage && preferredLanguage !== currentPageLang) {
             switchLanguage(preferredLanguage);
         }
@@ -186,6 +186,7 @@
         }
     }
 </script>
+
 
 </head>
 <body>
