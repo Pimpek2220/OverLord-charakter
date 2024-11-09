@@ -235,28 +235,36 @@
     }
 
     function searchCharacter() {
-        let input = document.getElementById('searchInput').value.toLowerCase();
-        let suggestionBox = document.getElementById('suggestionBox');
-        suggestionBox.innerHTML = '';
-        let found = false;
-        charactersData.forEach(character => {
-            for (const lang in character.name) {
-                if (character.name[lang].toLowerCase().includes(input)) {
-                    const suggestionItem = document.createElement('div');
-                    suggestionItem.classList.add('suggestion-item');
-                    suggestionItem.innerHTML = `<img src="${character.image}" alt="${character.name[lang]}"><span>${character.name[lang]}</span>`;
-                    suggestionItem.onclick = function() {
-                        document.getElementById(character.name.de.replace(/\s/g, '')).scrollIntoView({ behavior: 'smooth' });
-                        suggestionBox.style.display = 'none';
-                    };
-                    suggestionBox.appendChild(suggestionItem);
-                    found = true;
-                    break;
-                }
+    let input = document.getElementById('searchInput').value.toLowerCase();
+    let suggestionBox = document.getElementById('suggestionBox');
+    suggestionBox.innerHTML = '';
+    let found = false;
+    charactersData.forEach(character => {
+        for (const lang in character.name) {
+            if (character.name[lang].toLowerCase().includes(input)) {
+                const suggestionItem = document.createElement('div');
+                suggestionItem.classList.add('suggestion-item');
+                suggestionItem.innerHTML = `<img src="${character.image}" alt="${character.name[lang]}"><span>${character.name[lang]}</span>`;
+                
+                
+                suggestionItem.onclick = function() {
+                    const characterId = character.name.en.replace(/\s/g, '');
+                    const targetElement = document.getElementById(characterId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                    suggestionBox.style.display = 'none';
+                };
+
+                suggestionBox.appendChild(suggestionItem);
+                found = true;
+                break;
             }
-        });
-        suggestionBox.style.display = found ? 'block' : 'none';
-    }
+        }
+    });
+    suggestionBox.style.display = found ? 'block' : 'none';
+}
+
     </script>
 </head>
 <body>
@@ -293,7 +301,7 @@
         <h3 style="color: #ffd700; font-style: italic; text-align: center;">Vierte Staffel</h3>
         <p class="highlighted">In der vierten Staffel, als unangefochtener Herrscher anerkannt, setzt Ainz die Expansion des Magierreichs fort. Seine politischen Intrigen und diplomatischen Manöver werden immer komplexer, da er die Beziehungen zu benachbarten Königreichen und Feinden festigt, die seine wachsende Macht als Bedrohung wahrnehmen. Ainz steht vor neuen Herausforderungen, sowohl internen als auch externen, während er versucht, die Einheit von Nazarick zu bewahren und Unterstützung und Respekt von anderen Nationen zu erlangen. Inzwischen beginnen neue Geheimnisse und uralte Kräfte sich zu offenbaren, was Ainz und seine loyalen Wächter dazu zwingt, Entscheidungen zu treffen, die die Zukunft der gesamten Welt bestimmen werden.</p>
 
-        <div class="character">
+        <div class="character" id="AinzOoalGown">
             <h2>Ainz Ooal Gown</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Ainz_Anime_Updated.png" alt="Ainz Ooal Gown" onclick="openModal(this.src)">
             <p><strong>Charakter:</strong> kühl, berechnend</p>
@@ -302,7 +310,7 @@
             <p>Ainz ist ein unsterblicher Erzmagier und der Herrscher des Großen Grabes von Nazarick. Er besitzt enorme Macht und Ressourcen und ist ein Meister der Planung und Voraussicht, was ihn zu einem außergewöhnlichen Anführer macht.</p>
         </div>
 
-        <div class="character">
+        <div class="character" id="ShalltearBloodfallen">
             <h2>Shalltear Bloodfallen</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Shalltear_Anime_Updated.png" alt="Shalltear Bloodfallen" onclick="openModal(this.src)">
             <p><strong>Charakter:</strong> fanatisch, unberechenbar</p>
@@ -311,7 +319,7 @@
             <p>Shalltear ist eine der stärksten Wächterinnen, die Ainz verehrt und anbetet. Sie ist bekannt für ihre gnadenlose Natur und ihre Unberechenbarkeit im Kampf.</p>
         </div>
 
-        <div class="character">
+        <div class="character" id="Albedo">
             <h2>Albedo</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Albedo_Anime_Updated.png" alt="Albedo" onclick="openModal(this.src)">
             <p><strong>Charakter:</strong> loyal, fanatisch</p>
@@ -320,7 +328,7 @@
             <p>Albedo ist die Generalverwalterin der Wächter und hat eine obsessive Liebe zu Ainz. Sie ist schön, intelligent und äußerst loyal gegenüber ihrem Herrn.</p>
         </div>
 
-        <div class="character">
+        <div class="character" id="Demiurge">
             <h2>Demiurge</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Demiurge_Anime_Updated.png" alt="Demiurge" onclick="openModal(this.src)">
             <p><strong>Charakter:</strong> schlau, rational</p>
@@ -329,7 +337,7 @@
             <p>Demiurge ist der intelligenteste der Wächter mit durchschnittlichen Kampffähigkeiten. Sein strategisches Denken und seine Fähigkeit, die Bewegungen der Feinde vorherzusehen, sind unübertroffen.</p>
         </div>
 
-        <div class="character">
+        <div class="character" id="NarberalGamma">
             <h2>Narberal Gamma</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Narberal_Gamma_Profile.png" alt="Narberal Gamma" onclick="openModal(this.src)">
             <p><strong>Charakter:</strong> kühl, professionell</p>
@@ -338,7 +346,7 @@
             <p>Narberal Gamma ist eine der Kampfmägde von Nazarick und ein treues Mitglied der Pleiades. Sie ist bekannt für ihre kühle Haltung gegenüber Menschen und ihre außergewöhnlichen magischen Fähigkeiten, die sie zu einer hervorragenden Unterstützung im Kampf machen.</p>
         </div>
 
-        <div class="character">
+        <div class="character" id="YuriAlpha">
             <h2>Yuri Alpha</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Yuri_Alpha_V2.png" alt="Yuri Alpha" onclick="openModal(this.src)">
             <p><strong>Charakter:</strong> verantwortungsbewusst, gelassen</p>
@@ -347,7 +355,7 @@
             <p>Yuri Alpha ist die Anführerin der Kampfmädchengruppe Pleiades. Ihre Aufgabe ist es, die Aktionen des Teams zu koordinieren und Ordnung zu gewährleisten. Sie ist bekannt für ihre Disziplin, Loyalität und ruhige Natur, was sie zur Autorität innerhalb der Gruppe macht.</p>
         </div>
 
-        <div class="character">
+        <div class="character" id="LupusreginaBeta">
             <h2>Lupusregina Beta</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Lupusregina_Beta.png" alt="Lupusregina Beta" onclick="openModal(this.src)">
             <p><strong>Charakter:</strong> schelmisch, loyal</p>
@@ -356,7 +364,7 @@
             <p>Lupusregina Beta ist eine der Mägde von Pleiades, bekannt für ihre schelmische Natur, die oft ihre wahre Loyalität und Hingabe an Nazarick verbirgt. Trotz ihrer verspielten Persönlichkeit ist sie bei der Ausführung ihrer Aufgaben äußerst effektiv.</p>
         </div>
 
-        <div class="character">
+        <div class="character" id="CZ2128Delta">
             <h2>CZ2128 Delta</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/CZ_Profile_V2.png" alt="CZ2128 Delta" onclick="openModal(this.src)">
             <p><strong>Charakter:</strong> ruhig, präzise</p>
@@ -365,7 +373,7 @@
             <p>CZ2128 Delta ist ein ruhiges und präzises Mitglied der Pleiades, spezialisiert auf Scharfschützen. Ihr kühles und ausgeglichenes Wesen macht sie zu einer hervorragenden Unterstützung bei Operationen, die Präzision und Ruhe erfordern.</p>
         </div>
         
-                <div class="character">
+        <div class="character" id="SolutionEpsilon">
             <h2>Solution Epsilon</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Solution_Epsilon_Profile.png" alt="Solution Epsilon" onclick="openModal(this.src)">
             <p><strong>Charakter:</strong> schlau, mysteriös</p>
@@ -374,7 +382,7 @@
             <p>Solution Epsilon ist eine der Kampfmägde von Nazarick, bekannt für ihre Infiltrationsfähigkeiten. Sie ist geschickt darin, ihre Gegner zu manipulieren und sich schnell an Situationen anzupassen, was sie zu einer gefährlichen Gegnerin macht.</p>
         </div>
 
-        <div class="character">
+        <div class="character" id="EntomaVasilissaZeta">
             <h2>Entoma Vasilissa Zeta</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Entoma_Profile.png" alt="Entoma Vasilissa Zeta" onclick="openModal(this.src)">
             <p><strong>Charakter:</strong> hingebungsvoll, ruhig</p>
