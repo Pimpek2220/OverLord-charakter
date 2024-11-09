@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Персонажі з Overlord</title>
+    <title>Вступ персонажів Overlord</title>
     <style>
-
-        
         body {
             font-family: 'Times New Roman', serif;
             line-height: 1.6;
@@ -100,6 +98,7 @@
             margin-bottom: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
         .character img:hover {
             transform: scale(1.1);
@@ -112,16 +111,82 @@
             padding: 10px;
             border-radius: 5px;
         }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        .modal-content {
+            margin: 15% auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .suggestion-box {
+            position: absolute;
+            background-color: #2a2a2a;
+            color: #ffd700;
+            border: 1px solid #6a0dad;
+            border-radius: 5px;
+            max-width: 300px;
+            z-index: 3;
+            display: none;
+        }
+        .suggestion-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .suggestion-item img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+        .suggestion-item:hover {
+            background-color: #6a0dad;
+        }
     </style>
     <script>
+    const charactersData = [
+        { name: { de: 'Ainz Ooal Gown', en: 'Ainz Ooal Gown', zh: '安兹·乌尔·恭', uk: 'Айнз Ооал Гоун', pl: 'Ainz Ooal Gown' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/Ainz_Anime_Updated.png' },
+        { name: { de: 'Shalltear Bloodfallen', en: 'Shalltear Bloodfallen', zh: '夏提雅·布拉德弗伦', uk: 'Шалтіра Бладфолен', pl: 'Shalltear Bloodfallen' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/Shalltear_Anime_Updated.png' },
+        { name: { de: 'Albedo', en: 'Albedo', zh: '雅儿贝德', uk: 'Альбедо', pl: 'Albedo' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/Albedo_Anime_Updated.png' },
+        { name: { de: 'Demiurge', en: 'Demiurge', zh: '迪米乌哥斯', uk: 'Деміург', pl: 'Demiurge' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/Demiurge_Anime_Updated.png' },
+        { name: { de: 'Narberal Gamma', en: 'Narberal Gamma', zh: '娜贝拉尔·伽马', uk: 'Нарбераль Гамма', pl: 'Narberal Gamma' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/Narberal_Gamma_Profile.png' },
+        { name: { de: 'Yuri Alpha', en: 'Yuri Alpha', zh: '尤莉·阿尔法', uk: 'Юрі Альфа', pl: 'Yuri Alpha' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/Yuri_Alpha_V2.png' },
+        { name: { de: 'Lupusregina Beta', en: 'Lupusregina Beta', zh: '露普斯雷吉纳·贝塔', uk: 'Лупусрегина Бета', pl: 'Lupusregina Beta' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/Lupusregina_Beta.png' },
+        { name: { de: 'CZ2128 Delta', en: 'CZ2128 Delta', zh: 'CZ2128·德尔塔', uk: 'ЦЗ2128 Дельта', pl: 'CZ2128 Delta' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/CZ_Profile_V2.png' },
+        { name: { de: 'Solution Epsilon', en: 'Solution Epsilon', zh: '索留香·艾普西隆', uk: 'Солюшн Епсилон', pl: 'Solution Epsilon' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/Solution_Epsilon_Profile.png' },
+        { name: { de: 'Entoma Vasilissa Zeta', en: 'Entoma Vasilissa Zeta', zh: '恩多玛·瓦西丽萨·泽塔', uk: 'Ентома Василіса Дзета', pl: 'Entoma Vasilissa Zeta' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/Entoma_Profile.png' }
+    ];
+
     function switchLanguage(lang) {
-        
         localStorage.setItem('preferredLanguage', lang);
-
-        
         const currentPath = window.location.pathname;
-
-        
         let targetPage;
         switch (lang) {
             case 'pl':
@@ -142,21 +207,14 @@
             default:
                 return;
         }
-
-        
         if (!currentPath.endsWith(targetPage)) {
             window.location.href = targetPage;
         }
     }
 
     document.addEventListener('DOMContentLoaded', function () {
-        
         const preferredLanguage = localStorage.getItem('preferredLanguage');
-        
-        
         const currentPageLang = document.documentElement.lang;
-
-        
         if (preferredLanguage && preferredLanguage !== currentPageLang) {
             switchLanguage(preferredLanguage);
         }
@@ -176,25 +234,40 @@
 
     function searchCharacter() {
         let input = document.getElementById('searchInput').value.toLowerCase();
-        let characters = document.getElementsByClassName('character');
-        for (let i = 0; i < characters.length; i++) {
-            let characterName = characters[i].getElementsByTagName('h2')[0].innerText.toLowerCase();
-            if (characterName.includes(input)) {
-                characters[i].style.display = '';
-            } else {
-                characters[i].style.display = 'none';
+        let suggestionBox = document.getElementById('suggestionBox');
+        suggestionBox.innerHTML = '';
+        let found = false;
+        charactersData.forEach(character => {
+            for (const lang in character.name) {
+                if (character.name[lang].toLowerCase().includes(input)) {
+                    const suggestionItem = document.createElement('div');
+                    suggestionItem.classList.add('suggestion-item');
+                    suggestionItem.innerHTML = `<img src="${character.image}" alt="${character.name[lang]}"><span>${character.name[lang]}</span>`;
+                    suggestionItem.onclick = function() {
+                        document.getElementById(character.name.pl.replace(/\s/g, '')).scrollIntoView({ behavior: 'smooth' });
+                        suggestionBox.style.display = 'none';
+                    };
+                    suggestionBox.appendChild(suggestionItem);
+                    found = true;
+                    break;
+                }
             }
-        }
+        });
+        suggestionBox.style.display = found ? 'block' : 'none';
     }
-</script>
-
-
+    </script>
 </head>
 <body>
-     <div class="container">
+    <div id="imgModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <div class="container">
+        <h2 style="color: #ffd700; text-align: center;">Персонажі</h2>
         <div class="language-switch">
             <div class="dropdown">
-                <button class="dropdown-button">Виберіть мову</button>
+                <button class="dropdown-button">Вибрати мову</button>
                 <div class="dropdown-content">
                     <button onclick="switchLanguage('uk')">Українська</button>
                     <button onclick="switchLanguage('pl')">Polski</button>
@@ -204,142 +277,109 @@
                 </div>
             </div>
         </div>
-        <h1>Персонажі з Overlord</h1>
+        <input type="text" id="searchInput" onkeyup="searchCharacter()" placeholder="Шукати персонажа..." style="width: 100%; padding: 10px; margin-bottom: 15px;">
+        <div id="suggestionBox" class="suggestion-box"></div>
+        <h1>Вступ персонажів Overlord</h1>
         <h3 style="color: #ffd700; font-style: italic; text-align: center;">Що таке Overlord?</h3>
-        <p class="highlighted">«Overlord» — це захоплююча історія, написана японським автором Кугане Маруяма, яка згодом була адаптована в аніме та мангу. Події відбуваються у віртуальній реальності гри «Yggdrasil», де головний герой, гравець, який вирішує залишитися у грі перед її закриттям, раптом виявляє, що він сам і вся гільдія перенесені у незнайомий світ.</p>
+        <p class="highlighted">“Overlord” — це серія ранобе, створена японським автором Кугане Маруяма, яка пізніше була адаптована у вигляді аніме та манґи. Історія відбувається у віртуальній реальності гри “Yggdrasil”, де головний герой вирішує залишитися в грі перед її закриттям, тільки щоб виявити, що він і штаб-квартира його гільдії перенесені в невідомий світ.</p>
         <h3 style="color: #ffd700; font-style: italic; text-align: center;">Перший сезон</h3>
-        <p class="highlighted">У першому сезоні Айнц, колись відомий як Сузукі Сатору, опиняється у пастці в світі гри Yggdrasil після її несподіваного закриття. Спочатку він вивчає нові правила цього світу та виявляє, що його сили та характеристики збереглися, а NPC стали усвідомленими. Незабаром він розуміє, що йому необхідно розробити план для захисту Гробниці Назарік та підкорення навколишнього світу. З розвитком сюжету Айнц стикається з викликами, взаємодіє з місцевими силами та фракціями, які бачать у ньому або загрозу, або можливість.</p>
+        <p class="highlighted">У першому сезоні Айнз, раніше відомий як Сузукі Сатору, застряє в світі Yggdrasil після його раптового закриття. Спочатку Айнз досліджує правила цього нового світу, відкриваючи, що його сили та атрибути залишилися незмінними, а NPC отримали свідомість. Він швидко усвідомлює необхідність створити план для захисту Гробниці Назарік та домінування над навколишнім світом. Під час розвитку подій Айнз стикається з викликами, пов'язаними з взаємодією з місцевими силами та різними фракціями, які бачать у ньому або загрозу, або можливість.</p>
         <h3 style="color: #ffd700; font-style: italic; text-align: center;">Другий сезон</h3>
-        <p class="highlighted">У другому сезоні Айнц продовжує зміцнювати свою владу над Назаріком, протистоячи різним силам та фракціям, включаючи Королівство Ре-Естізе та Священне Королівство. Його стратегічні дії та зростаючий вплив починають викликати інтерес та побоювання у інших могутніх сил. Він реалізує план розширення впливу Назаріка, випробовуючи вірність своїх підлеглих і приховано маніпулюючи подіями.</p>
+        <p class="highlighted">У другому сезоні Айнз зміцнює свою владу над Назаріком, протистоячи різним силам і фракціям, включаючи Королівство Ре-Естізе та Святе Королівство. Його стратегічні дії та зростаючий вплив починають привертати увагу та викликати занепокоєння серед інших сил. Він реалізує план щодо розширення впливу Назаріка, випробовуючи лояльність своїх підлеглих та маніпулюючи подіями з-за лаштунків.</p>
         <h3 style="color: #ffd700; font-style: italic; text-align: center;">Третій сезон</h3>
-        <p class="highlighted">У третьому сезоні Айнц стає Магічним Королем, розширює свої території та здобуває визнання як непереможний лідер. Його союзи, інтриги та політичні маневри є інструментами для зміцнення його домінування та встановлення порядку, який відповідає його цілям. Нові виклики та суперники з'являються на його шляху, але з підтримкою своїх відданих охоронців Айнц рухається до абсолютної гегемонії, демонструючи свою непохитну рішучість досягти своїх цілей.</p>
+        <p class="highlighted">У третьому сезоні Айнз стає Магічним Королем, розширює свою територію та отримує визнання як непереможний лідер. Його альянси, інтриги та політичні маневри є інструментами для посилення його домінування та встановлення порядку, що відповідає його цілям і амбіціям. Нові виклики та противники з'являються на його шляху, але Айнз, підтримуваний своїми вірними охоронцями, рухається до абсолютної гегемонії, демонструючи свій безкомпромісний підхід до досягнення своїх цілей.</p>
         <h3 style="color: #ffd700; font-style: italic; text-align: center;">Четвертий сезон</h3>
-        <p class="highlighted">У четвертому сезоні Айнц, тепер визнаний як беззаперечний правитель, продовжує розширювати вплив Імперії Чарівника. Його політичні інтриги та дипломатичні маневри стають дедалі складнішими, коли він зміцнює відносини із сусідніми королівствами та ворогами, які починають вважати його зростаючу силу загрозою. Айнц стикається з новими викликами як внутрішніми, так і зовнішніми, намагаючись зберегти єдність Назаріка та здобути підтримку й повагу інших націй. Тим часом нові таємниці та стародавні сили починають розкриватися, змушуючи Айнца та його вірних охоронців приймати рішення, які визначать майбутнє всього світу.</p>
+        <p class="highlighted">У четвертому сезоні Айнз, тепер визнаний беззаперечним правителем, продовжує своє прагнення розширити вплив Імперії Чаклуна. Його політичні інтриги та дипломатичні маневри стають складнішими, коли він зміцнює відносини з сусідніми королівствами та ворогами, які починають бачити його зростаючу силу як загрозу. Айнз стикається з новими викликами як внутрішніми, так і зовнішніми, прагнучи зберегти єдність Назаріка та отримати підтримку і повагу інших народів. Тим часом починають розкриватися нові таємниці та давні сили, змушуючи Айнза та його вірних охоронців приймати рішення, які визначать майбутнє всього світу.</p>
 
         <div class="character">
-            <h2>Айнц Ооал Гоун</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Ainz_Anime_Updated.png" alt="Айнц Ооал Гоун">
-            <p><strong>Характер:</strong> холоднокровний, обачливий</p>
+            <h2>Айнз Ооал Гоун</h2>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Ainz_Anime_Updated.png" alt="Айнз Ооал Гоун" onclick="openModal(this.src)">
+            <p><strong>Характер:</strong> Спокійний, Розрахунковий</p>
             <p><strong>Раса:</strong> Нежить</p>
-            <p><strong>Титул:</strong> Король магів</p>
-            <p>Айнц - безсмертний архимаг і правитель Гробниці Назарік. Він має величезну силу та значні ресурси, а також є майстром планування і передбачення, що робить його видатним лідером.</p>
+            <p><strong>Титул:</strong> Магічний Король</p>
+            <p>Айнз — безсмертний архимаг та правитель Великої Гробниці Назарік. Він володіє величезною силою та ресурсами, що робить його майстром планування та передбачення, а також винятковим лідером.</p>
         </div>
 
         <div class="character">
-            <h2>Шалтір Бладфоллен</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Shalltear_Anime_Updated.png" alt="Шалтір Бладфоллен">
-            <p><strong>Характер:</strong> фанатична, непередбачувана</p>
+            <h2>Шалтіра Бладфолен</h2>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Shalltear_Anime_Updated.png" alt="Шалтіра Бладфолен" onclick="openModal(this.src)">
+            <p><strong>Характер:</strong> Фанатична, Непередбачувана</p>
             <p><strong>Раса:</strong> Вампір</p>
-            <p><strong>Титул:</strong> Кривава Діва</p>
-            <p>Шалтір - одна з найсильніших охоронців, яка обожнює і поклоняється Айнцу. Вона відома своєю безжальною природою та непередбачуваністю в бою.</p>
+            <p><strong>Титул:</strong> Кривава Валькірія</p>
+            <p>Шалтіра — одна з найсильніших охоронців, яка поклоняється і захоплюється Айнзом. Вона відома своєю безжальною природою та непередбачуваністю в бою.</p>
         </div>
 
         <div class="character">
             <h2>Альбедо</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Albedo_Anime_Updated.png" alt="Альбедо">
-            <p><strong>Характер:</strong> вірна, фанатична</p>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Albedo_Anime_Updated.png" alt="Альбедо" onclick="openModal(this.src)">
+            <p><strong>Характер:</strong> Лояльна, Фанатична</p>
             <p><strong>Раса:</strong> Демон</p>
-            <p><strong>Титул:</strong> Охоронець Генерал</p>
-            <p>Альбедо є головним охоронцем та має нав'язливу любов до Айнца. Вона красива, розумна та неймовірно віддана своєму господарю.</p>
+            <p><strong>Титул:</strong> Наглядачка Охоронців</p>
+            <p>Альбедо — наглядачка охоронців, яка глибоко і одержимо кохає Айнза. Вона красива, розумна і надзвичайно лояльна до свого господаря.</p>
         </div>
 
         <div class="character">
             <h2>Деміург</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Demiurge_Anime_Updated.png" alt="Деміург">
-            <p><strong>Характер:</strong> хитрий, розсудливий</p>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Demiurge_Anime_Updated.png" alt="Деміург" onclick="openModal(this.src)">
+            <p><strong>Характер:</strong> Кмітливий, Раціональний</p>
             <p><strong>Раса:</strong> Демон</p>
-            <p><strong>Титул:</strong> Творець пекельного полум'я</p>
-            <p>Деміург - найрозумніший із охоронців, з середніми бойовими можливостями. Його стратегічне мислення та здатність передбачати дії ворогів є неперевершеними.</p>
+            <p><strong>Титул:</strong> Володар Пекельного Вогню</p>
+            <p>Деміург — найрозумніший з охоронців з середніми бойовими здібностями. Його стратегічне мислення та здатність передбачати дії ворогів не мають рівних.</p>
         </div>
 
         <div class="character">
-            <h2>Маре</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Mare_Anime_Updated.png" alt="Маре">
-            <p><strong>Характер:</strong> сором'язливий, обережний</p>
-            <p><strong>Раса:</strong> Темний ельф</p>
-            <p><strong>Титул:</strong> Володар природи</p>
-            <p>Маре - молодший брат, який завжди носить жіночий одяг. Він має здатність керувати природою, що робить його ключовою фігурою в оборонних битвах.</p>
+            <h2>Нарбераль Гамма</h2>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Narberal_Gamma_Profile.png" alt="Нарбераль Гамма" onclick="openModal(this.src)">
+            <p><strong>Характер:</strong> Холодна, Професійна</p>
+            <p><strong>Раса:</strong> Доппельгангер</p>
+            <p><strong>Титул:</strong> Бойова служниця Плеяд</p>
+            <p>Нарбераль Гамма — одна з бойових служниць Назаріка та вірний член Плеяд. Вона відома своїм холодним ставленням до людей та винятковими магічними здібностями, що робить її цінним помічником у битвах.</p>
         </div>
 
         <div class="character">
-            <h2>Аура</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Aura_Anime_Updated.png" alt="Аура">
-            <p><strong>Характер:</strong> енергійна, впевнена в собі</p>
-            <p><strong>Раса:</strong> Темний ельф</p>
-            <p><strong>Титул:</strong> Видатна звіробійка</p>
-            <p>Аура - старша сестра, яка часто носить чоловічий одяг та дресирує тварин. Вона відважна та енергійна, добре керує і координує дії на місцях.</p>
+            <h2>Юрі Альфа</h2>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Yuri_Alpha_V2.png" alt="Юрі Альфа" onclick="openModal(this.src)">
+            <p><strong>Характер:</strong> Відповідальна, Спокійна</p>
+            <p><strong>Раса:</strong> Нежить</p>
+            <p><strong>Титул:</strong> Лідерка Плеяд</p>
+            <p>Юрі Альфа є лідеркою групи бойових служниць Плеяд. Її обов'язок — координувати дії групи та підтримувати порядок. Вона відома своєю дисципліною, лояльністю та спокійною вдачею, що робить її авторитетом у групі.</p>
         </div>
 
         <div class="character">
-            <h2>Кокітус</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Cocytus_Anime_Updated.png" alt="Кокітус">
-            <p><strong>Характер:</strong> відважний, стійкий</p>
-            <p><strong>Раса:</strong> Король комах</p>
-            <p><strong>Титул:</strong> Творець крижаних річок</p>
-            <p>Кокітус - один з найсильніших охоронців, володіє великою силою та повагою до супротивників. Він вміє адаптувати свою стратегію, щоб забезпечити перемогу.</p>
+            <h2>Лупусрегіна Бета</h2>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Lupusregina_Beta.png" alt="Лупусрегіна Бета" onclick="openModal(this.src)">
+            <p><strong>Характер:</strong> Шалена, Лояльна</p>
+            <p><strong>Раса:</strong> Вовк-перевертень</p>
+            <p><strong>Титул:</strong> Член Плеяд</p>
+            <p>Лупусрегіна Бета — одна з Плеяд, відома своєю пустотливою натурою, що часто приховує її справжню лояльність і відданість Назаріку. Незважаючи на свою грайливу особистість, вона надзвичайно ефективна при виконанні своїх місій.</p>
         </div>
 
         <div class="character">
-    <h2>Актор Пандори</h2>
-    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Pandora_Actor_Databook.png" alt="Актор Пандори">
-    <p><strong>Характер:</strong> вірний, хитрий</p>
-    <p><strong>Раса:</strong> Доппельгангер</p>
-    <p><strong>Титул:</strong> Командир спеціальних місій</p>
-    <p>Актор Пандори був створений самим Айнцом і володіє надзвичайними адаптивними здібностями, а також здатністю приймати форму різних істот. Його відданість абсолютна, і його роль полягає у захисті секретів Назаріка та виконанні спеціальних завдань.</p>
-</div>
+            <h2>ЦЗ2128 Дельта</h2>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/CZ_Profile_V2.png" alt="ЦЗ2128 Дельта" onclick="openModal(this.src)">
+            <p><strong>Характер:</strong> Тиха, Точна</p>
+            <p><strong>Раса:</strong> Автоматон</p>
+            <p><strong>Титул:</strong> Снайперка Плеяд</p>
+            <p>ЦЗ2128 Дельта є членом Плеяд, спеціалізується на стрільбі. Її спокійний і врівноважений характер робить її відмінним активом у операціях, що вимагають точності та контролю.</p>
+        </div>
 
         <div class="character">
-    <h2>Нарбераль Гамма</h2>
-    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Narberal_Gamma_Profile.png" alt="Нарбераль Гамма">
-    <p><strong>Характер:</strong> холодна, професійна</p>
-    <p><strong>Раса:</strong> Доппельгангер</p>
-    <p><strong>Титул:</strong> Член Плеяд</p>
-    <p>Нарбераль Гамма - одна з бойових служниць Назаріка та відданий член Плеяд. Вона відома своїм холодним ставленням до людей та винятковими магічними здібностями, що робить її чудовою підтримкою в битвах.</p>
-</div>
+            <h2>Солюшн Епсилон</h2>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Solution_Epsilon_Profile.png" alt="Солюшн Епсилон" onclick="openModal(this.src)">
+            <p><strong>Характер:</strong> Хитра, Містична</p>
+            <p><strong>Раса:</strong> Слайм</p>
+            <p><strong>Титул:</strong> Член Плеяд</p>
+            <p>Солюшн Епсилон — одна з бойових служниць Назаріка, відома своїми здібностями до інфільтрації. Вона майстерно маніпулює противниками і швидко адаптується до ситуацій, що робить її грізною суперницею.</p>
+        </div>
 
         <div class="character">
-    <h2>Юрі Альфа</h2>
-    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Yuri_Alpha_V2.png" alt="Юрі Альфа">
-    <p><strong>Характер:</strong> відповідальна, спокійна</p>
-    <p><strong>Раса:</strong> Нежить</p>
-    <p><strong>Титул:</strong> Лідерка Плеяд</p>
-    <p>Юрі Альфа - лідерка групи бойових служниць Плеяд. Вона відповідає за координацію дій команди та забезпечення порядку. Вона відома своєю дисциплінованістю, відданістю та спокійним характером, що робить її авторитетом у групі.</p>
-</div>
-
-        <div class="character">
-    <h2>Лупусрегіна Бета</h2>
-    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Lupusregina_Beta.png" alt="Лупусрегіна Бета">
-    <p><strong>Характер:</strong> грайлива, віддана</p>
-    <p><strong>Раса:</strong> Вовкулака</p>
-    <p><strong>Титул:</strong> Член Плеяд</p>
-    <p>Лупусрегіна Бета - одна з служниць Плеяд, відома своєю грайливою натурою, яка часто приховує її справжню відданість Назаріку. Попри свій грайливий характер, вона дуже ефективна у виконанні місій.</p>
-</div>
-
-        <div class="character">
-    <h2>CZ2128 Дельта</h2>
-    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/CZ_Profile_V2.png" alt="CZ2128 Дельта">
-    <p><strong>Характер:</strong> тиха, точна</p>
-    <p><strong>Раса:</strong> Автоматон</p>
-    <p><strong>Титул:</strong> Снайперка Плеяд</p>
-    <p>CZ2128 Дельта - тиха і точна членкиня Плеяд, спеціалізується на стрільбі. Її холодний і виважений характер робить її чудовою підтримкою в операціях, які вимагають точності та витримки.</p>
-</div>
-
-   <div class="character">
-    <h2>Солюшн Епсілон</h2>
-    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Solution_Epsilon_Profile.png" alt="Солюшн Епсілон">
-    <p><strong>Характер:</strong> хитра, загадкова</p>
-    <p><strong>Раса:</strong> Слайм</p>
-    <p><strong>Титул:</strong> Член Плеяд</p>
-    <p>Солюшн Епсілон - одна з бойових служниць Назаріка, відома своїми здібностями до інфільтрації. Вона вміє маніпулювати супротивниками та швидко адаптуватися до ситуацій, що робить її небезпечним супротивником.</p>
-</div>
-
-        <div class="character">
-    <h2>Ентома Василіса Зета</h2>
-    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Entoma_Profile.png" alt="Ентома Василіса Зета">
-    <p><strong>Характер:</strong> віддана, спокійна</p>
-    <p><strong>Раса:</strong> Комахоподібна</p>
-    <p><strong>Титул:</strong> Член Плеяд</p>
-    <p>Ентома Василіса Зета - спокійна та віддана членка Плеяд. Її вміння полягають у контролі комах, які вона використовує для бою та шпигунства. Попри її м'який зовнішній вигляд, вона є небезпечним противником.</p>
+            <h2>Ентома Василіса Дзета</h2>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Entoma_Profile.png" alt="Ентома Василіса Дзета" onclick="openModal(this.src)">
+            <p><strong>Характер:</strong> Віддана, Спокійна</p>
+            <p><strong>Раса:</strong> Комахоподібна</p>
+            <p><strong>Титул:</strong> Член Плеяд</p>
+            <p>Ентома Василіса Дзета — спокійна і віддана член Плеяд. Її здібності базуються на контролі над комахами, які вона використовує у бою та для шпигунства. Незважаючи на її м'яку зовнішність, вона є небезпечною супротивницею.</p>
+        </div>
     </div>
 </body>
 </html>
