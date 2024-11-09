@@ -121,6 +121,8 @@
                 window.location.href = 'overlord_characters_page_de.html';
             } else if (lang === 'uk') {
                 window.location.href = 'overlord_characters_page_uk.html';
+            } else if (lang === 'en') {
+                window.location.href = 'overlord_characters_page_en.html';
             }
         }
     </script>
@@ -129,12 +131,13 @@
      <div class="container">
         <div class="language-switch">
             <div class="dropdown">
-                <button class="dropdown-button">Виберіть мову</button>
+                <button class="dropdown-button">Select Language</button>
                 <div class="dropdown-content">
                     <button onclick="switchLanguage('uk')">Українська</button>
                     <button onclick="switchLanguage('pl')">Polski</button>
                     <button onclick="switchLanguage('zh')">中文</button>
                     <button onclick="switchLanguage('de')">Deutsch</button>
+                    <button onclick="switchLanguage('en')">English</button>
                 </div>
             </div>
         </div>
