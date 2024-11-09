@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Overlord Charaktere</title>
     <style>
+        /* Beibehalten des ursprünglichen CSS */
         body {
             font-family: 'Times New Roman', serif;
             line-height: 1.6;
@@ -98,6 +99,7 @@
             margin-bottom: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
         .character img:hover {
             transform: scale(1.1);
@@ -109,6 +111,40 @@
             border: 2px solid #ffd700;
             padding: 10px;
             border-radius: 5px;
+        }
+        /* Stil für modales Fenster */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        .modal-content {
+            margin: 15% auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
         }
     </style>
     <script>
@@ -125,10 +161,28 @@
                 window.location.href = 'overlord_characters_page_en.html';
             }
         }
+
+        function openModal(imgSrc) {
+            var modal = document.getElementById("imgModal");
+            var modalImg = document.getElementById("modalImage");
+            modal.style.display = "block";
+            modalImg.src = imgSrc;
+        }
+
+        function closeModal() {
+            var modal = document.getElementById("imgModal");
+            modal.style.display = "none";
+        }
     </script>
 </head>
 <body>
-     <div class="container">
+    <div id="imgModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+     
+        <h2 style="color: #ffd700; text-align: center;">Charaktere</h2>
         <div class="language-switch">
             <div class="dropdown">
                 <button class="dropdown-button">Sprache wählen</button>
@@ -155,7 +209,7 @@
 
         <div class="character">
             <h2>Ainz Ooal Gown</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Ainz_Anime_Updated.png" alt="Ainz Ooal Gown">
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Ainz_Anime_Updated.png" alt="Ainz Ooal Gown" onclick="openModal(this.src)">
             <p><strong>Charakter:</strong> kühl, berechnend</p>
             <p><strong>Rasse:</strong> Untoter</p>
             <p><strong>Titel:</strong> Magierkönig</p>
@@ -164,7 +218,7 @@
 
         <div class="character">
             <h2>Shalltear Bloodfallen</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Shalltear_Anime_Updated.png" alt="Shalltear Bloodfallen">
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Shalltear_Anime_Updated.png" alt="Shalltear Bloodfallen" onclick="openModal(this.src)">
             <p><strong>Charakter:</strong> fanatisch, unberechenbar</p>
             <p><strong>Rasse:</strong> Vampir</p>
             <p><strong>Titel:</strong> Blutkriegerin</p>
@@ -173,7 +227,7 @@
 
         <div class="character">
             <h2>Albedo</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Albedo_Anime_Updated.png" alt="Albedo">
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Albedo_Anime_Updated.png" alt="Albedo" onclick="openModal(this.src)">
             <p><strong>Charakter:</strong> loyal, fanatisch</p>
             <p><strong>Rasse:</strong> Dämon</p>
             <p><strong>Titel:</strong> Generalwächterin</p>
@@ -182,7 +236,7 @@
 
         <div class="character">
             <h2>Demiurge</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Demiurge_Anime_Updated.png" alt="Demiurge">
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Demiurge_Anime_Updated.png" alt="Demiurge" onclick="openModal(this.src)">
             <p><strong>Charakter:</strong> schlau, rational</p>
             <p><strong>Rasse:</strong> Dämon</p>
             <p><strong>Titel:</strong> Schöpfer der Höllenflammen</p>
@@ -191,7 +245,7 @@
 
         <div class="character">
             <h2>Mare</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Mare_Anime_Updated.png" alt="Mare">
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Mare_Anime_Updated.png" alt="Mare" onclick="openModal(this.src)">
             <p><strong>Charakter:</strong> schüchtern, vorsichtig</p>
             <p><strong>Rasse:</strong> Dunkler Elf</p>
             <p><strong>Titel:</strong> Herr der Natur</p>
@@ -200,7 +254,7 @@
 
         <div class="character">
             <h2>Aura</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Aura_Anime_Updated.png" alt="Aura">
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Aura_Anime_Updated.png" alt="Aura" onclick="openModal(this.src)">
             <p><strong>Charakter:</strong> energisch, selbstbewusst</p>
             <p><strong>Rasse:</strong> Dunkler Elf</p>
             <p><strong>Titel:</strong> Legendäre Bestienbändigerin</p>
@@ -209,7 +263,7 @@
 
         <div class="character">
             <h2>Cocytus</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Cocytus_Anime_Updated.png" alt="Cocytus">
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Cocytus_Anime_Updated.png" alt="Cocytus" onclick="openModal(this.src)">
             <p><strong>Charakter:</strong> mutig, ausdauernd</p>
             <p><strong>Rasse:</strong> Insektenkönig</p>
             <p><strong>Titel:</strong> Schöpfer der Eisflüsse</p>
@@ -218,7 +272,7 @@
 
         <div class="character">
     <h2>Pandoras Schauspieler</h2>
-    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Pandora_Actor_Databook.png" alt="Pandoras Schauspieler">
+    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Pandora_Actor_Databook.png" alt="Pandoras Schauspieler" onclick="openModal(this.src)">
     <p><strong>Charakter:</strong> loyal, schlau</p>
     <p><strong>Rasse:</strong> Doppelgänger</p>
     <p><strong>Titel:</strong> Kommandant der Spezialeinheiten</p>
@@ -227,7 +281,7 @@
 
         <div class="character">
     <h2>Narberal Gamma</h2>
-    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Narberal_Gamma_Profile.png" alt="Narberal Gamma">
+    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Narberal_Gamma_Profile.png" alt="Narberal Gamma" onclick="openModal(this.src)">
     <p><strong>Charakter:</strong> kühl, professionell</p>
     <p><strong>Rasse:</strong> Doppelgänger</p>
     <p><strong>Titel:</strong> Mitglied der Pleiades</p>
@@ -236,7 +290,7 @@
 
         <div class="character">
     <h2>Yuri Alpha</h2>
-    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Yuri_Alpha_V2.png" alt="Yuri Alpha">
+    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Yuri_Alpha_V2.png" alt="Yuri Alpha" onclick="openModal(this.src)">
     <p><strong>Charakter:</strong> verantwortungsbewusst, gelassen</p>
     <p><strong>Rasse:</strong> Untoter</p>
     <p><strong>Titel:</strong> Anführerin der Pleiades</p>
@@ -245,7 +299,7 @@
 
         <div class="character">
     <h2>Lupusregina Beta</h2>
-    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Lupusregina_Beta.png" alt="Lupusregina Beta">
+    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Lupusregina_Beta.png" alt="Lupusregina Beta" onclick="openModal(this.src)">
     <p><strong>Charakter:</strong> schelmisch, loyal</p>
     <p><strong>Rasse:</strong> Werwolf</p>
     <p><strong>Titel:</strong> Mitglied der Pleiades</p>
@@ -254,16 +308,16 @@
 
         <div class="character">
     <h2>CZ2128 Delta</h2>
-    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/CZ_Profile_V2.png" alt="CZ2128 Delta">
+    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/CZ_Profile_V2.png" alt="CZ2128 Delta" onclick="openModal(this.src)">
     <p><strong>Charakter:</strong> ruhig, präzise</p>
     <p><strong>Rasse:</strong> Automaton</p>
     <p><strong>Titel:</strong> Scharfschützin der Pleiades</p>
     <p>CZ2128 Delta ist ein ruhiges und präzises Mitglied der Pleiades, spezialisiert auf Scharfschützen. Ihr kühles und ausgeglichenes Wesen macht sie zu einer hervorragenden Unterstützung bei Operationen, die Präzision und Ruhe erfordern.</p>
 </div>
 
-   <div class="character">
+        <div class="character">
     <h2>Solution Epsilon</h2>
-    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Solution_Epsilon_Profile.png" alt="Solution Epsilon">
+    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Solution_Epsilon_Profile.png" alt="Solution Epsilon" onclick="openModal(this.src)">
     <p><strong>Charakter:</strong> schlau, mysteriös</p>
     <p><strong>Rasse:</strong> Schleim</p>
     <p><strong>Titel:</strong> Mitglied der Pleiades</p>
@@ -272,7 +326,7 @@
 
         <div class="character">
     <h2>Entoma Vasilissa Zeta</h2>
-    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Entoma_Profile.png" alt="Entoma Vasilissa Zeta">
+    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Entoma_Profile.png" alt="Entoma Vasilissa Zeta" onclick="openModal(this.src)">
     <p><strong>Charakter:</strong> hingebungsvoll, ruhig</p>
     <p><strong>Rasse:</strong> Insektoid</p>
     <p><strong>Titel:</strong> Mitglied der Pleiades</p>
