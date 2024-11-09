@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Overlord Charaktere</title>
     <style>
-
-        
         body {
             font-family: 'Times New Roman', serif;
             line-height: 1.6;
@@ -113,7 +111,6 @@
             padding: 10px;
             border-radius: 5px;
         }
-     
         .modal {
             display: none;
             position: fixed;
@@ -147,16 +144,49 @@
             text-decoration: none;
             cursor: pointer;
         }
+        .suggestion-box {
+            position: absolute;
+            background-color: #2a2a2a;
+            color: #ffd700;
+            border: 1px solid #6a0dad;
+            border-radius: 5px;
+            max-width: 300px;
+            z-index: 3;
+            display: none;
+        }
+        .suggestion-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .suggestion-item img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+        .suggestion-item:hover {
+            background-color: #6a0dad;
+        }
     </style>
     <script>
+    const charactersData = [
+        { name: { de: 'Ainz Ooal Gown', en: 'Ainz Ooal Gown', zh: '安兹·乌尔·恭', uk: 'Айнз Ооал Гоун', pl: 'Ainz Ooal Gown' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/Ainz_Anime_Updated.png' },
+        { name: { de: 'Shalltear Bloodfallen', en: 'Shalltear Bloodfallen', zh: '夏提雅·布拉德弗伦', uk: 'Шалтіра Бладфолен', pl: 'Shalltear Bloodfallen' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/Shalltear_Anime_Updated.png' },
+        { name: { de: 'Albedo', en: 'Albedo', zh: '雅儿贝德', uk: 'Альбедо', pl: 'Albedo' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/Albedo_Anime_Updated.png' },
+        { name: { de: 'Demiurge', en: 'Demiurge', zh: '迪米乌哥斯', uk: 'Деміург', pl: 'Demiurge' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/Demiurge_Anime_Updated.png' },
+        { name: { de: 'Narberal Gamma', en: 'Narberal Gamma', zh: '娜贝拉尔·伽马', uk: 'Нарбераль Гамма', pl: 'Narberal Gamma' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/Narberal_Gamma_Profile.png' },
+        { name: { de: 'Yuri Alpha', en: 'Yuri Alpha', zh: '尤莉·阿尔法', uk: 'Юрі Альфа', pl: 'Yuri Alpha' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/Yuri_Alpha_V2.png' },
+        { name: { de: 'Lupusregina Beta', en: 'Lupusregina Beta', zh: '露普斯雷吉纳·贝塔', uk: 'Лупусрегина Бета', pl: 'Lupusregina Beta' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/Lupusregina_Beta.png' },
+        { name: { de: 'CZ2128 Delta', en: 'CZ2128 Delta', zh: 'CZ2128·德尔塔', uk: 'ЦЗ2128 Дельта', pl: 'CZ2128 Delta' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/CZ_Profile_V2.png' },
+        { name: { de: 'Solution Epsilon', en: 'Solution Epsilon', zh: '索留香·艾普西隆', uk: 'Солюшн Епсилон', pl: 'Solution Epsilon' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/Solution_Epsilon_Profile.png' },
+        { name: { de: 'Entoma Vasilissa Zeta', en: 'Entoma Vasilissa Zeta', zh: '恩多玛·瓦西丽萨·泽塔', uk: 'Ентома Василіса Дзета', pl: 'Entoma Vasilissa Zeta' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/Entoma_Profile.png' }
+    ];
+
     function switchLanguage(lang) {
-        
         localStorage.setItem('preferredLanguage', lang);
-
-        
         const currentPath = window.location.pathname;
-
-        
         let targetPage;
         switch (lang) {
             case 'pl':
@@ -177,21 +207,14 @@
             default:
                 return;
         }
-
-        
         if (!currentPath.endsWith(targetPage)) {
             window.location.href = targetPage;
         }
     }
 
     document.addEventListener('DOMContentLoaded', function () {
-        
         const preferredLanguage = localStorage.getItem('preferredLanguage');
-        
-        
         const currentPageLang = document.documentElement.lang;
-
-        
         if (preferredLanguage && preferredLanguage !== currentPageLang) {
             switchLanguage(preferredLanguage);
         }
@@ -211,18 +234,28 @@
 
     function searchCharacter() {
         let input = document.getElementById('searchInput').value.toLowerCase();
-        let characters = document.getElementsByClassName('character');
-        for (let i = 0; i < characters.length; i++) {
-            let characterName = characters[i].getElementsByTagName('h2')[0].innerText.toLowerCase();
-            if (characterName.includes(input)) {
-                characters[i].style.display = '';
-            } else {
-                characters[i].style.display = 'none';
+        let suggestionBox = document.getElementById('suggestionBox');
+        suggestionBox.innerHTML = '';
+        let found = false;
+        charactersData.forEach(character => {
+            for (const lang in character.name) {
+                if (character.name[lang].toLowerCase().includes(input)) {
+                    const suggestionItem = document.createElement('div');
+                    suggestionItem.classList.add('suggestion-item');
+                    suggestionItem.innerHTML = `<img src="${character.image}" alt="${character.name[lang]}"><span>${character.name[lang]}</span>`;
+                    suggestionItem.onclick = function() {
+                        document.getElementById(character.name.de.replace(/\s/g, '')).scrollIntoView({ behavior: 'smooth' });
+                        suggestionBox.style.display = 'none';
+                    };
+                    suggestionBox.appendChild(suggestionItem);
+                    found = true;
+                    break;
+                }
             }
-        }
+        });
+        suggestionBox.style.display = found ? 'block' : 'none';
     }
-</script>
-
+    </script>
 </head>
 <body>
     <div id="imgModal" class="modal">
@@ -230,7 +263,7 @@
         <img class="modal-content" id="modalImage">
     </div>
 
-     
+    <div class="container">
         <h2 style="color: #ffd700; text-align: center;">Charaktere</h2>
         <div class="language-switch">
             <div class="dropdown">
@@ -244,6 +277,8 @@
                 </div>
             </div>
         </div>
+        <input type="text" id="searchInput" onkeyup="searchCharacter()" placeholder="Search for a character..." style="width: 100%; padding: 10px; margin-bottom: 15px;">
+        <div id="suggestionBox" class="suggestion-box"></div>
         <h1>Charaktere aus Overlord</h1>
         <h3 style="color: #ffd700; font-style: italic; text-align: center;">Was ist Overlord?</h3>
         <p class="highlighted">„Overlord“ ist eine erstaunliche Geschichte, geschrieben vom japanischen Autor Kugane Maruyama, die später als Anime und Manga adaptiert wurde. Die Geschichte spielt in der virtuellen Realität des Spiels „Yggdrasil“, wo der Hauptcharakter, ein Spieler, der beschließt, im Spiel zu bleiben, kurz bevor es geschlossen wird, plötzlich entdeckt, dass er selbst und die gesamte Gilde in eine unbekannte Welt versetzt wurden.</p>
@@ -293,93 +328,58 @@
         </div>
 
         <div class="character">
-            <h2>Mare</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Mare_Anime_Updated.png" alt="Mare" onclick="openModal(this.src)">
-            <p><strong>Charakter:</strong> schüchtern, vorsichtig</p>
-            <p><strong>Rasse:</strong> Dunkler Elf</p>
-            <p><strong>Titel:</strong> Herr der Natur</p>
-            <p>Mare ist der jüngere Bruder, der immer weibliche Kleidung trägt. Er verfügt über nützliche Fähigkeiten wie die Kontrolle der Natur, was ihn zu einer wichtigen Figur in Verteidigungskämpfen macht.</p>
+            <h2>Narberal Gamma</h2>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Narberal_Gamma_Profile.png" alt="Narberal Gamma" onclick="openModal(this.src)">
+            <p><strong>Charakter:</strong> kühl, professionell</p>
+            <p><strong>Rasse:</strong> Doppelgänger</p>
+            <p><strong>Titel:</strong> Mitglied der Pleiades</p>
+            <p>Narberal Gamma ist eine der Kampfmägde von Nazarick und ein treues Mitglied der Pleiades. Sie ist bekannt für ihre kühle Haltung gegenüber Menschen und ihre außergewöhnlichen magischen Fähigkeiten, die sie zu einer hervorragenden Unterstützung im Kampf machen.</p>
         </div>
 
         <div class="character">
-            <h2>Aura</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Aura_Anime_Updated.png" alt="Aura" onclick="openModal(this.src)">
-            <p><strong>Charakter:</strong> energisch, selbstbewusst</p>
-            <p><strong>Rasse:</strong> Dunkler Elf</p>
-            <p><strong>Titel:</strong> Legendäre Bestienbändigerin</p>
-            <p>Aura ist die ältere Schwester und Tierbändigerin, die oft Jungenkleidung trägt. Sie ist mutig und energisch und beherrscht das Führen und Koordinieren von Feldoperationen hervorragend.</p>
+            <h2>Yuri Alpha</h2>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Yuri_Alpha_V2.png" alt="Yuri Alpha" onclick="openModal(this.src)">
+            <p><strong>Charakter:</strong> verantwortungsbewusst, gelassen</p>
+            <p><strong>Rasse:</strong> Untoter</p>
+            <p><strong>Titel:</strong> Anführerin der Pleiades</p>
+            <p>Yuri Alpha ist die Anführerin der Kampfmädchengruppe Pleiades. Ihre Aufgabe ist es, die Aktionen des Teams zu koordinieren und Ordnung zu gewährleisten. Sie ist bekannt für ihre Disziplin, Loyalität und ruhige Natur, was sie zur Autorität innerhalb der Gruppe macht.</p>
         </div>
 
         <div class="character">
-            <h2>Cocytus</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Cocytus_Anime_Updated.png" alt="Cocytus" onclick="openModal(this.src)">
-            <p><strong>Charakter:</strong> mutig, ausdauernd</p>
-            <p><strong>Rasse:</strong> Insektenkönig</p>
-            <p><strong>Titel:</strong> Schöpfer der Eisflüsse</p>
-            <p>Cocytus ist einer der mächtigsten Wächter, der über große Stärke verfügt und seinen Gegnern Respekt entgegenbringt. Er kann seine Strategie anpassen, um den Sieg zu sichern.</p>
+            <h2>Lupusregina Beta</h2>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Lupusregina_Beta.png" alt="Lupusregina Beta" onclick="openModal(this.src)">
+            <p><strong>Charakter:</strong> schelmisch, loyal</p>
+            <p><strong>Rasse:</strong> Werwolf</p>
+            <p><strong>Titel:</strong> Mitglied der Pleiades</p>
+            <p>Lupusregina Beta ist eine der Mägde von Pleiades, bekannt für ihre schelmische Natur, die oft ihre wahre Loyalität und Hingabe an Nazarick verbirgt. Trotz ihrer verspielten Persönlichkeit ist sie bei der Ausführung ihrer Aufgaben äußerst effektiv.</p>
         </div>
 
         <div class="character">
-    <h2>Pandoras Schauspieler</h2>
-    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Pandora_Actor_Databook.png" alt="Pandoras Schauspieler" onclick="openModal(this.src)">
-    <p><strong>Charakter:</strong> loyal, schlau</p>
-    <p><strong>Rasse:</strong> Doppelgänger</p>
-    <p><strong>Titel:</strong> Kommandant der Spezialeinheiten</p>
-    <p>Pandoras Schauspieler wurde von Ainz selbst erschaffen und verfügt über außergewöhnliche Anpassungsfähigkeiten und die Fähigkeit, die Gestalt verschiedener Wesen anzunehmen. Seine Loyalität ist absolut, und seine Aufgabe besteht darin, die Geheimnisse von Nazarick zu schützen und spezielle Missionen auszuführen.</p>
-</div>
+            <h2>CZ2128 Delta</h2>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/CZ_Profile_V2.png" alt="CZ2128 Delta" onclick="openModal(this.src)">
+            <p><strong>Charakter:</strong> ruhig, präzise</p>
+            <p><strong>Rasse:</strong> Automaton</p>
+            <p><strong>Titel:</strong> Scharfschützin der Pleiades</p>
+            <p>CZ2128 Delta ist ein ruhiges und präzises Mitglied der Pleiades, spezialisiert auf Scharfschützen. Ihr kühles und ausgeglichenes Wesen macht sie zu einer hervorragenden Unterstützung bei Operationen, die Präzision und Ruhe erfordern.</p>
+        </div>
+        
+                <div class="character">
+            <h2>Solution Epsilon</h2>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Solution_Epsilon_Profile.png" alt="Solution Epsilon" onclick="openModal(this.src)">
+            <p><strong>Charakter:</strong> schlau, mysteriös</p>
+            <p><strong>Rasse:</strong> Schleim</p>
+            <p><strong>Titel:</strong> Mitglied der Pleiades</p>
+            <p>Solution Epsilon ist eine der Kampfmägde von Nazarick, bekannt für ihre Infiltrationsfähigkeiten. Sie ist geschickt darin, ihre Gegner zu manipulieren und sich schnell an Situationen anzupassen, was sie zu einer gefährlichen Gegnerin macht.</p>
+        </div>
 
         <div class="character">
-    <h2>Narberal Gamma</h2>
-    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Narberal_Gamma_Profile.png" alt="Narberal Gamma" onclick="openModal(this.src)">
-    <p><strong>Charakter:</strong> kühl, professionell</p>
-    <p><strong>Rasse:</strong> Doppelgänger</p>
-    <p><strong>Titel:</strong> Mitglied der Pleiades</p>
-    <p>Narberal Gamma ist eine der Kampfmägde von Nazarick und ein treues Mitglied der Pleiades. Sie ist bekannt für ihre kühle Haltung gegenüber Menschen und ihre außergewöhnlichen magischen Fähigkeiten, die sie zu einer hervorragenden Unterstützung im Kampf machen.</p>
-</div>
+            <h2>Entoma Vasilissa Zeta</h2>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Entoma_Profile.png" alt="Entoma Vasilissa Zeta" onclick="openModal(this.src)">
+            <p><strong>Charakter:</strong> hingebungsvoll, ruhig</p>
+            <p><strong>Rasse:</strong> Insektoid</p>
+            <p><strong>Titel:</strong> Mitglied der Pleiades</p>
+            <p>Entoma Vasilissa Zeta ist ein ruhiges und hingebungsvolles Mitglied der Pleiades. Ihre Fähigkeiten basieren auf der Kontrolle von Insekten, die sie für den Kampf und die Spionage einsetzt. Trotz ihres sanften Äußeren ist sie eine gefährliche Gegnerin.</p>
+        </div>
 
-        <div class="character">
-    <h2>Yuri Alpha</h2>
-    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Yuri_Alpha_V2.png" alt="Yuri Alpha" onclick="openModal(this.src)">
-    <p><strong>Charakter:</strong> verantwortungsbewusst, gelassen</p>
-    <p><strong>Rasse:</strong> Untoter</p>
-    <p><strong>Titel:</strong> Anführerin der Pleiades</p>
-    <p>Yuri Alpha ist die Anführerin der Kampfmägdegruppe Pleiades. Ihre Aufgabe ist es, die Aktionen des Teams zu koordinieren und Ordnung zu gewährleisten. Sie ist bekannt für ihre Disziplin, Loyalität und ruhige Natur, was sie zur Autorität innerhalb der Gruppe macht.</p>
-</div>
-
-        <div class="character">
-    <h2>Lupusregina Beta</h2>
-    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Lupusregina_Beta.png" alt="Lupusregina Beta" onclick="openModal(this.src)">
-    <p><strong>Charakter:</strong> schelmisch, loyal</p>
-    <p><strong>Rasse:</strong> Werwolf</p>
-    <p><strong>Titel:</strong> Mitglied der Pleiades</p>
-    <p>Lupusregina Beta ist eine der Mägde von Pleiades, bekannt für ihre schelmische Natur, die oft ihre wahre Loyalität und Hingabe an Nazarick verbirgt. Trotz ihrer verspielten Persönlichkeit ist sie bei der Ausführung ihrer Aufgaben äußerst effektiv.</p>
-</div>
-
-        <div class="character">
-    <h2>CZ2128 Delta</h2>
-    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/CZ_Profile_V2.png" alt="CZ2128 Delta" onclick="openModal(this.src)">
-    <p><strong>Charakter:</strong> ruhig, präzise</p>
-    <p><strong>Rasse:</strong> Automaton</p>
-    <p><strong>Titel:</strong> Scharfschützin der Pleiades</p>
-    <p>CZ2128 Delta ist ein ruhiges und präzises Mitglied der Pleiades, spezialisiert auf Scharfschützen. Ihr kühles und ausgeglichenes Wesen macht sie zu einer hervorragenden Unterstützung bei Operationen, die Präzision und Ruhe erfordern.</p>
-</div>
-
-        <div class="character">
-    <h2>Solution Epsilon</h2>
-    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Solution_Epsilon_Profile.png" alt="Solution Epsilon" onclick="openModal(this.src)">
-    <p><strong>Charakter:</strong> schlau, mysteriös</p>
-    <p><strong>Rasse:</strong> Schleim</p>
-    <p><strong>Titel:</strong> Mitglied der Pleiades</p>
-    <p>Solution Epsilon ist eine der Kampfmägde von Nazarick, bekannt für ihre Infiltrationsfähigkeiten. Sie ist geschickt darin, ihre Gegner zu manipulieren und sich schnell an Situationen anzupassen, was sie zu einer gefährlichen Gegnerin macht.</p>
-</div>
-
-        <div class="character">
-    <h2>Entoma Vasilissa Zeta</h2>
-    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Entoma_Profile.png" alt="Entoma Vasilissa Zeta" onclick="openModal(this.src)">
-    <p><strong>Charakter:</strong> hingebungsvoll, ruhig</p>
-    <p><strong>Rasse:</strong> Insektoid</p>
-    <p><strong>Titel:</strong> Mitglied der Pleiades</p>
-    <p>Entoma Vasilissa Zeta ist ein ruhiges und hingebungsvolles Mitglied der Pleiades. Ihre Fähigkeiten basieren auf der Kontrolle von Insekten, die sie für den Kampf und die Spionage einsetzt. Trotz ihres sanften Äußeren ist sie eine gefährliche Gegnerin.</p>
-    </div>
 </body>
 </html>
