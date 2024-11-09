@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Overlord Character Introduction</title>
     <style>
-        /* Original CSS Styles */
+      
         body {
             font-family: 'Times New Roman', serif;
             line-height: 1.6;
@@ -112,7 +112,7 @@
             padding: 10px;
             border-radius: 5px;
         }
-        /* Modal Styles */
+   
         .modal {
             display: none;
             position: fixed;
@@ -148,32 +148,80 @@
         }
     </style>
     <script>
-        function switchLanguage(lang) {
-            if (lang === 'pl') {
-                window.location.href = 'index.html';
-            } else if (lang === 'zh') {
-                window.location.href = 'overlord_characters_page_zh.html';
-            } else if (lang === 'de') {
-                window.location.href = 'overlord_characters_page_de.html';
-            } else if (lang === 'uk') {
-                window.location.href = 'overlord_characters_page_uk.html';
-            } else if (lang === 'en') {
-                window.location.href = 'overlord_characters_page_en.html';
+    function switchLanguage(lang) {
+      
+        localStorage.setItem('preferredLanguage', lang);
+
+    
+        const currentPath = window.location.pathname;
+
+  
+        let targetPage;
+        switch (lang) {
+            case 'pl':
+                targetPage = 'index.html';
+                break;
+            case 'zh':
+                targetPage = 'overlord_characters_page_zh.html';
+                break;
+            case 'de':
+                targetPage = 'overlord_characters_page_de.html';
+                break;
+            case 'uk':
+                targetPage = 'overlord_characters_page_uk.html';
+                break;
+            case 'en':
+                targetPage = 'overlord_characters_page_en.html';
+                break;
+            default:
+                return;
+        }
+
+       
+        if (!currentPath.includes(targetPage)) {
+            window.location.href = targetPage;
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // 获取首选语言
+        const preferredLanguage = localStorage.getItem('preferredLanguage');
+        
+    
+        const currentPageLang = document.documentElement.lang;
+
+      
+        if (preferredLanguage && preferredLanguage !== currentPageLang) {
+            switchLanguage(preferredLanguage);
+        }
+    });
+
+    function openModal(imgSrc) {
+        var modal = document.getElementById("imgModal");
+        var modalImg = document.getElementById("modalImage");
+        modal.style.display = "block";
+        modalImg.src = imgSrc;
+    }
+
+    function closeModal() {
+        var modal = document.getElementById("imgModal");
+        modal.style.display = "none";
+    }
+
+    function searchCharacter() {
+        let input = document.getElementById('searchInput').value.toLowerCase();
+        let characters = document.getElementsByClassName('character');
+        for (let i = 0; i < characters.length; i++) {
+            let characterName = characters[i].getElementsByTagName('h2')[0].innerText.toLowerCase();
+            if (characterName.includes(input)) {
+                characters[i].style.display = '';
+            } else {
+                characters[i].style.display = 'none';
             }
         }
+    }
+</script>
 
-        function openModal(imgSrc) {
-            var modal = document.getElementById("imgModal");
-            var modalImg = document.getElementById("modalImage");
-            modal.style.display = "block";
-            modalImg.src = imgSrc;
-        }
-
-        function closeModal() {
-            var modal = document.getElementById("imgModal");
-            modal.style.display = "none";
-        }
-    </script>
 </head>
 <body>
     <div id="imgModal" class="modal">
