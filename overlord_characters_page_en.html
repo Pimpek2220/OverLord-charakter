@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Overlord Character Introduction</title>
     <style>
-      
         body {
             font-family: 'Times New Roman', serif;
             line-height: 1.6;
@@ -112,7 +111,6 @@
             padding: 10px;
             border-radius: 5px;
         }
-   
         .modal {
             display: none;
             position: fixed;
@@ -146,16 +144,49 @@
             text-decoration: none;
             cursor: pointer;
         }
+        .suggestion-box {
+            position: absolute;
+            background-color: #2a2a2a;
+            color: #ffd700;
+            border: 1px solid #6a0dad;
+            border-radius: 5px;
+            max-width: 300px;
+            z-index: 3;
+            display: none;
+        }
+        .suggestion-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .suggestion-item img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+        .suggestion-item:hover {
+            background-color: #6a0dad;
+        }
     </style>
     <script>
+    const charactersData = [
+        { name: { de: 'Ainz Ooal Gown', en: 'Ainz Ooal Gown', zh: '安兹·乌尔·恭', uk: 'Айнз Ооал Гоун', pl: 'Ainz Ooal Gown' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/Ainz_Anime_Updated.png' },
+        { name: { de: 'Shalltear Bloodfallen', en: 'Shalltear Bloodfallen', zh: '夏提雅·布拉德弗伦', uk: 'Шалтіра Бладфолен', pl: 'Shalltear Bloodfallen' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/Shalltear_Anime_Updated.png' },
+        { name: { de: 'Albedo', en: 'Albedo', zh: '雅儿贝德', uk: 'Альбедо', pl: 'Albedo' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/Albedo_Anime_Updated.png' },
+        { name: { de: 'Demiurge', en: 'Demiurge', zh: '迪米乌哥斯', uk: 'Деміург', pl: 'Demiurge' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/Demiurge_Anime_Updated.png' },
+        { name: { de: 'Narberal Gamma', en: 'Narberal Gamma', zh: '娜贝拉尔·伽马', uk: 'Нарбераль Гамма', pl: 'Narberal Gamma' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/Narberal_Gamma_Profile.png' },
+        { name: { de: 'Yuri Alpha', en: 'Yuri Alpha', zh: '尤莉·阿尔法', uk: 'Юрі Альфа', pl: 'Yuri Alpha' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/Yuri_Alpha_V2.png' },
+        { name: { de: 'Lupusregina Beta', en: 'Lupusregina Beta', zh: '露普斯雷吉纳·贝塔', uk: 'Лупусрегина Бета', pl: 'Lupusregina Beta' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/Lupusregina_Beta.png' },
+        { name: { de: 'CZ2128 Delta', en: 'CZ2128 Delta', zh: 'CZ2128·德尔塔', uk: 'ЦЗ2128 Дельта', pl: 'CZ2128 Delta' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/CZ_Profile_V2.png' },
+        { name: { de: 'Solution Epsilon', en: 'Solution Epsilon', zh: '索留香·艾普西隆', uk: 'Солюшн Епсилон', pl: 'Solution Epsilon' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/Solution_Epsilon_Profile.png' },
+        { name: { de: 'Entoma Vasilissa Zeta', en: 'Entoma Vasilissa Zeta', zh: '恩多玛·瓦西丽萨·泽塔', uk: 'Ентома Василіса Дзета', pl: 'Entoma Vasilissa Zeta' }, image: 'https://pimpek2220.github.io/OverLord-charakter/Pictures/Entoma_Profile.png' }
+    ];
+
     function switchLanguage(lang) {
-        
         localStorage.setItem('preferredLanguage', lang);
-
-        
         const currentPath = window.location.pathname;
-
-        
         let targetPage;
         switch (lang) {
             case 'pl':
@@ -176,21 +207,14 @@
             default:
                 return;
         }
-
-        
         if (!currentPath.endsWith(targetPage)) {
             window.location.href = targetPage;
         }
     }
 
     document.addEventListener('DOMContentLoaded', function () {
-        
         const preferredLanguage = localStorage.getItem('preferredLanguage');
-        
-        
         const currentPageLang = document.documentElement.lang;
-
-        
         if (preferredLanguage && preferredLanguage !== currentPageLang) {
             switchLanguage(preferredLanguage);
         }
@@ -210,18 +234,28 @@
 
     function searchCharacter() {
         let input = document.getElementById('searchInput').value.toLowerCase();
-        let characters = document.getElementsByClassName('character');
-        for (let i = 0; i < characters.length; i++) {
-            let characterName = characters[i].getElementsByTagName('h2')[0].innerText.toLowerCase();
-            if (characterName.includes(input)) {
-                characters[i].style.display = '';
-            } else {
-                characters[i].style.display = 'none';
+        let suggestionBox = document.getElementById('suggestionBox');
+        suggestionBox.innerHTML = '';
+        let found = false;
+        charactersData.forEach(character => {
+            for (const lang in character.name) {
+                if (character.name[lang].toLowerCase().includes(input)) {
+                    const suggestionItem = document.createElement('div');
+                    suggestionItem.classList.add('suggestion-item');
+                    suggestionItem.innerHTML = `<img src="${character.image}" alt="${character.name[lang]}"><span>${character.name[lang]}</span>`;
+                    suggestionItem.onclick = function() {
+                        document.getElementById(character.name.pl.replace(/\s/g, '')).scrollIntoView({ behavior: 'smooth' });
+                        suggestionBox.style.display = 'none';
+                    };
+                    suggestionBox.appendChild(suggestionItem);
+                    found = true;
+                    break;
+                }
             }
-        }
+        });
+        suggestionBox.style.display = found ? 'block' : 'none';
     }
-</script>
-
+    </script>
 </head>
 <body>
     <div id="imgModal" class="modal">
@@ -243,17 +277,19 @@
                 </div>
             </div>
         </div>
+        <input type="text" id="searchInput" onkeyup="searchCharacter()" placeholder="Search character..." style="width: 100%; padding: 10px; margin-bottom: 15px;">
+        <div id="suggestionBox" class="suggestion-box"></div>
         <h1>Overlord Character Introduction</h1>
         <h3 style="color: #ffd700; font-style: italic; text-align: center;">What is Overlord?</h3>
-        <p class="highlighted">“Overlord” is an exciting story created by the Japanese author Kugane Maruyama, later adapted into anime and manga. The story takes place in the virtual reality game “Yggdrasil”, where the protagonist decides to stay in the game before its shutdown, only to discover that he and his entire guild have been transported to an unknown world.</p>
+        <p class="highlighted">“Overlord” is a light novel series created by the Japanese author Kugane Maruyama, later adapted into an anime and manga. The story takes place in the virtual reality game “Yggdrasil”, where the protagonist decides to stay in the game before its shutdown, only to find himself and the headquarters of his entire guild transported to an unknown world.</p>
         <h3 style="color: #ffd700; font-style: italic; text-align: center;">Season One</h3>
-        <p class="highlighted">In the first season, Ainz (originally known as Suzuki Satoru) becomes trapped in the world of the game “Yggdrasil” after its sudden shutdown. Initially, Ainz explores the rules of this new world and finds that his powers and attributes remain intact, and the NPCs have gained awareness. He quickly realizes that he needs to create a plan to protect the Great Tomb of Nazarick and conquer the surrounding world. As events unfold, Ainz faces challenges from interacting with local powers and factions who view him as either a threat or an opportunity.</p>
+        <p class="highlighted">In the first season, Ainz, formerly known as Suzuki Satoru, becomes trapped in the world of Yggdrasil after its sudden shutdown. Initially, Ainz explores the rules of this new world, discovering that his powers and attributes have remained intact, and the NPCs have gained consciousness. He quickly realizes the need to form a plan to protect the Tomb of Nazarick and dominate the surrounding world. As events progress, Ainz faces challenges from interacting with local powers and various factions that see him as either a threat or an opportunity.</p>
         <h3 style="color: #ffd700; font-style: italic; text-align: center;">Season Two</h3>
-        <p class="highlighted">In the second season, Ainz consolidates his control over Nazarick and confronts various powers and factions, including the Re-Estize Kingdom and the Holy Kingdom. His strategic actions and growing influence begin to attract attention and concern from other forces. He implements a plan to expand Nazarick's influence, testing the loyalty of his subordinates and manipulating events from behind the scenes.</p>
+        <p class="highlighted">In the second season, Ainz consolidates his power over Nazarick, confronting various forces and factions, including the Re-Estize Kingdom, the Holy Kingdom, and other groups. His strategic actions and growing influence begin to attract interest and concern from other powers. He implements a plan to expand Nazarick's influence, testing the loyalty of his subordinates and manipulating events from behind the scenes.</p>
         <h3 style="color: #ffd700; font-style: italic; text-align: center;">Season Three</h3>
-        <p class="highlighted">In the third season, Ainz becomes the Sorcerer King, expands his territory, and gains recognition as an invincible leader. His alliances, intrigues, and political maneuvers are tools to strengthen his dominion and establish an order that meets his goals. New challenges and enemies arise, but with the support of his loyal guardians, Ainz moves towards absolute hegemony, showing an uncompromising approach to achieving his aims.</p>
+        <p class="highlighted">In the third season, Ainz becomes the Sorcerer King, expands his territory, and gains recognition as an invincible leader. His alliances, intrigues, and political maneuvers are tools to increase his dominance and establish an order that serves his goals and ambitions. New challenges and opponents emerge on his path, but Ainz, supported by his loyal guardians, moves toward absolute hegemony, demonstrating his ruthless approach to achieving his objectives.</p>
         <h3 style="color: #ffd700; font-style: italic; text-align: center;">Season Four</h3>
-        <p class="highlighted">In the fourth season, Ainz, now recognized as the undisputed ruler, continues to expand the influence of the Sorcerer Kingdom. His political intrigues and diplomatic maneuvers become more complex as he strengthens relationships with neighboring kingdoms and those who see his growing power as a threat. Ainz faces new internal and external challenges, striving to keep Nazarick united and gain the support and respect of other nations. Meanwhile, new secrets and ancient forces begin to emerge, forcing Ainz and his loyal guardians to make decisions that will determine the fate of the entire world.</p>
+        <p class="highlighted">In the fourth season, Ainz, now recognized as the undisputed ruler, continues his pursuit of expanding the influence of the Sorcerer Kingdom. His political intrigues and diplomatic maneuvers become more intricate as he tightens relations with neighboring kingdoms and enemies who begin to see his growing power. Ainz faces new challenges, both internal and external, as he strives to maintain the unity of Nazarick and gain the support and respect of other nations. Meanwhile, new mysteries and ancient forces start to unfold, forcing Ainz and his loyal guardians to make decisions that will shape the future of the entire world.</p>
 
         <div class="character">
             <h2>Ainz Ooal Gown</h2>
@@ -269,7 +305,7 @@
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Shalltear_Anime_Updated.png" alt="Shalltear Bloodfallen" onclick="openModal(this.src)">
             <p><strong>Personality:</strong> Fanatical, Unpredictable</p>
             <p><strong>Race:</strong> Vampire</p>
-            <p><strong>Title:</strong> Blood Warrior</p>
+            <p><strong>Title:</strong> Blood Valkyrie</p>
             <p>Shalltear is one of the most powerful guardians who worships and admires Ainz. She is known for her ruthless nature and unpredictable behavior in battle.</p>
         </div>
 
@@ -287,44 +323,8 @@
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Demiurge_Anime_Updated.png" alt="Demiurge" onclick="openModal(this.src)">
             <p><strong>Personality:</strong> Clever, Rational</p>
             <p><strong>Race:</strong> Demon</p>
-            <p><strong>Title:</strong> Creator of Hellfire</p>
-            <p>Demiurge is one of the smartest guardians, with average combat abilities. His strategic thinking and ability to anticipate enemy moves are unparalleled.</p>
-        </div>
-
-        <div class="character">
-            <h2>Mare</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Mare_Anime_Updated.png" alt="Mare" onclick="openModal(this.src)">
-            <p><strong>Personality:</strong> Shy, Cautious</p>
-            <p><strong>Race:</strong> Dark Elf</p>
-            <p><strong>Title:</strong> Nature Lord</p>
-            <p>Mare is the younger brother who often wears female clothing. He possesses useful abilities, including controlling nature, which makes him crucial in defensive battles.</p>
-        </div>
-
-        <div class="character">
-            <h2>Aura</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Aura_Anime_Updated.png" alt="Aura" onclick="openModal(this.src)">
-            <p><strong>Personality:</strong> Energetic, Confident</p>
-            <p><strong>Race:</strong> Dark Elf</p>
-            <p><strong>Title:</strong> Legendary Beast Tamer</p>
-            <p>Aura is the elder sister and a beast tamer, often dressed in boyish attire. She is brave, energetic, and excels at leading and coordinating actions on the battlefield.</p>
-        </div>
-
-        <div class="character">
-            <h2>Cocytus</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Cocytus_Anime_Updated.png" alt="Cocytus" onclick="openModal(this.src)">
-            <p><strong>Personality:</strong> Brave, Persistent</p>
-            <p><strong>Race:</strong> Insectoid King</p>
-            <p><strong>Title:</strong> Creator of Frozen Rivers</p>
-            <p>Cocytus is one of the most powerful guardians, possessing great strength and respect for his opponents. He can adapt his strategy to ensure victory.</p>
-        </div>
-
-        <div class="character">
-            <h2>Pandora's Actor</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Pandora_Actor_Databook.png" alt="Pandora's Actor" onclick="openModal(this.src)">
-            <p><strong>Personality:</strong> Loyal, Cunning</p>
-            <p><strong>Race:</strong> Doppelgänger</p>
-            <p><strong>Title:</strong> Special Task Commander</p>
-            <p>Pandora's Actor was created by Ainz himself and has extraordinary adaptive abilities and the power to take on the form of different beings. His loyalty is absolute, and his role is to protect Nazarick's secrets and perform special missions.</p>
+            <p><strong>Title:</strong> Lord of Hellfire</p>
+            <p>Demiurge is the smartest of the guardians with moderate combat abilities. His strategic thinking and ability to anticipate enemy moves are unparalleled.</p>
         </div>
 
         <div class="character">
@@ -332,8 +332,8 @@
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Narberal_Gamma_Profile.png" alt="Narberal Gamma" onclick="openModal(this.src)">
             <p><strong>Personality:</strong> Cold, Professional</p>
             <p><strong>Race:</strong> Doppelgänger</p>
-            <p><strong>Title:</strong> Member of Pleiades</p>
-            <p>Narberal Gamma is one of Nazarick's battle maids and a loyal member of Pleiades. She is known for her cold demeanor towards humans and exceptional magical abilities, making her a valuable support in battles.</p>
+            <p><strong>Title:</strong> Pleiades Battle Maid</p>
+            <p>Narberal Gamma is one of Nazarick's battle maids and a loyal member of the Pleiades. She is known for her cold demeanor towards humans and exceptional magical abilities, making her a valuable support in battles.</p>
         </div>
 
         <div class="character">
@@ -341,8 +341,8 @@
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Yuri_Alpha_V2.png" alt="Yuri Alpha" onclick="openModal(this.src)">
             <p><strong>Personality:</strong> Responsible, Composed</p>
             <p><strong>Race:</strong> Undead</p>
-            <p><strong>Title:</strong> Leader of Pleiades</p>
-            <p>Yuri Alpha is the leader of the battle maid group Pleiades. Her duty is to coordinate the group's actions and maintain order. She is known for her discipline, loyalty, and calm nature, making her an authority within the group.</p>
+            <p><strong>Title:</strong> Leader of the Pleiades</p>
+            <p>Yuri Alpha is the leader of the Pleiades battle maid group. Her duty is to coordinate the group's actions and maintain order. She is known for her discipline, loyalty, and calm nature, making her an authority within the group.</p>
         </div>
 
         <div class="character">
@@ -350,7 +350,7 @@
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Lupusregina_Beta.png" alt="Lupusregina Beta" onclick="openModal(this.src)">
             <p><strong>Personality:</strong> Mischievous, Loyal</p>
             <p><strong>Race:</strong> Werewolf</p>
-            <p><strong>Title:</strong> Member of Pleiades</p>
+            <p><strong>Title:</strong> Member of the Pleiades</p>
             <p>Lupusregina Beta is one of the Pleiades, known for her mischievous nature, which often hides her true loyalty and dedication to Nazarick. Despite her playful personality, she is extremely effective when carrying out her missions.</p>
         </div>
 
@@ -368,7 +368,7 @@
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Solution_Epsilon_Profile.png" alt="Solution Epsilon" onclick="openModal(this.src)">
             <p><strong>Personality:</strong> Cunning, Mysterious</p>
             <p><strong>Race:</strong> Slime</p>
-            <p><strong>Title:</strong> Member of Pleiades</p>
+            <p><strong>Title:</strong> Member of the Pleiades</p>
             <p>Solution Epsilon is one of Nazarick's battle maids, known for her infiltration abilities. She is skilled at manipulating opponents and adapting quickly to situations, making her a formidable adversary.</p>
         </div>
 
@@ -377,7 +377,7 @@
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Entoma_Profile.png" alt="Entoma Vasilissa Zeta" onclick="openModal(this.src)">
             <p><strong>Personality:</strong> Loyal, Calm</p>
             <p><strong>Race:</strong> Insectoid</p>
-            <p><strong>Title:</strong> Member of Pleiades</p>
+            <p><strong>Title:</strong> Member of the Pleiades</p>
             <p>Entoma Vasilissa Zeta is a calm and devoted member of the Pleiades. Her skills are based on controlling insects, which she uses in combat and for spying. Despite her gentle appearance, she is a dangerous opponent.</p>
         </div>
     </div>
