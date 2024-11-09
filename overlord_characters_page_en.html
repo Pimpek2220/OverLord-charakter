@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overlord Characters</title>
+    <style>
+        /* Retain original CSS */
+        body {
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+            background-color: #1a1a1a;
+            color: #b0b0b0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 95%;
+            margin: auto;
+            overflow: hidden;
+            background: #2a2a2a;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+        h1, h2 {
+            color: #ffd700;
+            font-weight: bold;
+        }
+        h1 {
+            border-bottom: 2px solid #6a0dad;
+            padding-bottom: 10px;
+        }
+        .language-switch {
+            position: relative;
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 15px;
+        }
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-button {
+            background-color: #ffd700;
+            color: #1a1a1a;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .dropdown-button:hover {
+            background-color: #e5c100;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #2a2a2a;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .dropdown-content button {
+            background-color: #ffd700;
+            color: #1a1a1a;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .dropdown-content button:hover {
+            background-color: #e5c100;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .character {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 3px solid #990000;
+            border-radius: 8px;
+            background: linear-gradient(145deg, #330000, #1a1a1a);
+            box-shadow: 0 0 10px 5px rgba(153, 0, 0, 0.6);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .character:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px 10px rgba(153, 0, 0, 0.8);
+        }
+        .character img {
+            width: 100%;
+            max-width: 150px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+            transition: transform 0.3s ease;
+        }
+        .character img:hover {
+            transform: scale(1.1);
+        }
+        .character p {
+            margin: 5px 0;
+        }
+        .highlighted {
+            border: 2px solid #ffd700;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+    <script>
+        function switchLanguage(lang) {
+            if (lang === 'pl') {
+                window.location.href = 'index.html';
+            } else if (lang === 'zh') {
+                window.location.href = 'overlord_characters_page_zh.html';
+            } else if (lang === 'de') {
+                window.location.href = 'overlord_characters_page_de.html';
+            } else if (lang === 'uk') {
+                window.location.href = 'overlord_characters_page_uk.html';
+            } else if (lang === 'en') {
+                window.location.href = 'overlord_characters_page_en.html';
+            }
+        }
+    </script>
+</head>
+<body>
+     <div class="container">
+        <div class="language-switch">
+            <div class="dropdown">
+                <button class="dropdown-button">Select Language</button>
+                <div class="dropdown-content">
+                    <button onclick="switchLanguage('uk')">Українська</button>
+                    <button onclick="switchLanguage('pl')">Polski</button>
+                    <button onclick="switchLanguage('zh')">中文</button>
+                    <button onclick="switchLanguage('de')">Deutsch</button>
+                    <button onclick="switchLanguage('en')">English</button>
+                </div>
+            </div>
+        </div>
+        <h1>Overlord Characters</h1>
+        <h3 style="color: #ffd700; font-style: italic; text-align: center;">What is Overlord?</h3>
+        <p class="highlighted">"Overlord" is a light novel written by the Japanese author Kugane Maruyama, which was later adapted into an anime and manga. The story takes place in the virtual reality game "Yggdrasil," where the protagonist, a player who decides to stay in the game before its closure, unexpectedly finds himself and the entire guild headquarters transported to an unknown world.</p>
+        <h3 style="color: #ffd700; font-style: italic; text-align: center;">First Season</h3>
+        <p class="highlighted">In the first season, Ainz, formerly known as Suzuki Satoru, becomes trapped in the game world of Yggdrasil after its sudden closure. Initially, Ainz explores the new rules of this world and discovers that his powers and attributes have been retained, while the NPC characters have gained consciousness. He quickly realizes the need to formulate a plan to protect the Great Tomb of Nazarick and conquer the surrounding world. As the plot progresses, Ainz faces challenges arising from interactions with local powers and various factions who either see him as a threat or an opportunity.</p>
+        <h3 style="color: #ffd700; font-style: italic; text-align: center;">Second Season</h3>
+        <p class="highlighted">In the second season, Ainz consolidates his rule over Nazarick, confronting various forces and factions, including the Re-Estize Kingdom, the Holy Kingdom, and others. His strategic actions and growing influence begin to attract interest and concern among other powers. He implements a plan to expand Nazarick's influence, testing the loyalty of his subordinates and manipulating events from the shadows.</p>
+        <h3 style="color: #ffd700; font-style: italic; text-align: center;">Third Season</h3>
+        <p class="highlighted">In the third season, Ainz becomes the Sorcerer King, expanding his territory and gaining recognition as an undefeated leader. His alliances, intrigues, and political maneuvers serve to extend his dominance and establish an order that satisfies his ambitions. New challenges and adversaries emerge, but supported by his loyal guardians, Ainz moves towards absolute hegemony, showcasing his ruthless approach to achieving his objectives.</p>
+        <h3 style="color: #ffd700; font-style: italic; text-align: center;">Fourth Season</h3>
+        <p class="highlighted">In the fourth season, Ainz, now recognized as an undisputed ruler, continues to expand the influence of the Sorcerer Kingdom. His political intrigues and diplomatic maneuvers become more complex as he strengthens ties with neighboring kingdoms and enemies who begin to see his growing power as a threat. Ainz faces new challenges, both internal and external, as he strives to maintain the unity of Nazarick and gain the support and respect of other nations. Meanwhile, new mysteries and ancient forces begin to reveal themselves, forcing Ainz and his loyal guardians to make decisions that will determine the future of the entire world.</p>
+
+        <div class="character">
+            <h2>Ainz Ooal Gown</h2>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Ainz_Anime_Updated.png" alt="Ainz Ooal Gown">
+            <p><strong>Character:</strong> cold, calculating</p>
+            <p><strong>Race:</strong> Undead</p>
+            <p><strong>Title:</strong> Sorcerer King</p>
+            <p>Ainz is an immortal archmage and the ruler of the Great Tomb of Nazarick. He possesses immense power and vast resources and is a master of planning and foresight, making him an exceptional leader.</p>
+        </div>
+
+        <div class="character">
+            <h2>Shalltear Bloodfallen</h2>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Shalltear_Anime_Updated.png" alt="Shalltear Bloodfallen">
+            <p><strong>Character:</strong> fanatical, unpredictable</p>
+            <p><strong>Race:</strong> Vampire</p>
+            <p><strong>Title:</strong> Blood Valkyrie</p>
+            <p>Shalltear is one of the most powerful guardians, who loves and worships Ainz. She is known for her ruthless nature and unpredictable behavior in battle.</p>
+        </div>
+
+        <div class="character">
+            <h2>Albedo</h2>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Albedo_Anime_Updated.png" alt="Albedo">
+            <p><strong>Character:</strong> loyal, fanatical</p>
+            <p><strong>Race:</strong> Demon</p>
+            <p><strong>Title:</strong> Overseer of the Guardians</p>
+            <p>Albedo is the overseer of the Guardians and is obsessively in love with Ainz. She is beautiful, intelligent, and extremely loyal to her master.</p>
+        </div>
+
+        <div class="character">
+            <h2>Demiurge</h2>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Demiurge_Anime_Updated.png" alt="Demiurge">
+            <p><strong>Character:</strong> cunning, rational</p>
+            <p><strong>Race:</strong> Demon</p>
+            <p><strong>Title:</strong> Creator of Hellfire</p>
+            <p>Demiurge is the smartest of the Guardians, with average combat abilities. His strategic thinking and ability to predict enemy moves are unparalleled.</p>
+        </div>
+
+        <div class="character">
+            <h2>Mare</h2>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Mare_Anime_Updated.png" alt="Mare">
+            <p><strong>Character:</strong> shy, cautious</p>
+            <p><strong>Race:</strong> Dark Elf</p>
+            <p><strong>Title:</strong> Lord of Nature</p>
+            <p>Mare is the younger brother, who always wears female clothing. He possesses useful abilities, including nature control, which makes him key in defensive battles.</p>
+        </div>
+
+        <div class="character">
+            <h2>Aura</h2>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Aura_Anime_Updated.png" alt="Aura">
+            <p><strong>Character:</strong> energetic, confident</p>
+            <p><strong>Race:</strong> Dark Elf</p>
+            <p><strong>Title:</strong> Renowned Beast Trainer</p>
+            <p>Aura is the older sister and an animal trainer who often wears boys' clothes. She is brave and energetic, excelling in leadership and coordination of field activities.</p>
+        </div>
+
+        <div class="character">
+            <h2>Cocytus</h2>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Cocytus_Anime_Updated.png" alt="Cocytus">
+            <p><strong>Character:</strong> brave, enduring</p>
+            <p><strong>Race:</strong> Insect King</p>
+            <p><strong>Title:</strong> Creator of Frozen Rivers</p>
+            <p>Cocytus is one of the most powerful guardians, with great strength and respect for opponents. He can adapt his strategy to ensure victory.</p>
+        </div>
+
+        <div class="character">
+    <h2>Pandora's Actor</h2>
+    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Pandora_Actor_Databook.png" alt="Pandora's Actor">
+    <p><strong>Character:</strong> loyal, cunning</p>
+    <p><strong>Race:</strong> Doppelgänger</p>
+    <p><strong>Title:</strong> Commander of Special Missions</p>
+    <p>Pandora's Actor was created by Ainz himself and possesses extraordinary adaptive abilities as well as the ability to take the forms of various beings. His loyalty is absolute, and his role is to protect the secrets of Nazarick and carry out special missions.</p>
+</div>
+
+        <div class="character">
+    <h2>Narberal Gamma</h2>
+    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Narberal_Gamma_Profile.png" alt="Narberal Gamma">
+    <p><strong>Character:</strong> cold, professional</p>
+    <p><strong>Race:</strong> Doppelgänger</p>
+    <p><strong>Title:</strong> Member of the Pleiades</p>
+    <p>Narberal Gamma is one of the combat maids of Nazarick and a loyal member of the Pleiades. She is known for her cold attitude towards humans and exceptional magical abilities, making her an excellent support in battles.</p>
+</div>
+
+        <div class="character">
+    <h2>Yuri Alpha</h2>
+    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Yuri_Alpha_V2.png" alt="Yuri Alpha">
+    <p><strong>Character:</strong> responsible, composed</p>
+    <p><strong>Race:</strong> Undead</p>
+    <p><strong>Title:</strong> Leader of the Pleiades</p>
+    <p>Yuri Alpha is the leader of the battle maid group, the Pleiades. Her role is to coordinate the team's actions and maintain order. She is known for her discipline, loyalty, and calm character, making her an authority within the group.</p>
+</div>
+
+        <div class="character">
+    <h2>Lupusregina Beta</h2>
+    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Lupusregina_Beta.png" alt="Lupusregina Beta">
+    <p><strong>Character:</strong> mischievous, loyal</p>
+    <p><strong>Race:</strong> Werewolf</p>
+    <p><strong>Title:</strong> Member of the Pleiades</p>
+    <p>Lupusregina Beta is one of the Pleiades maids with an extremely playful nature, often hiding her true loyalty and dedication to Nazarick. Despite her playful personality, she is extremely effective in completing her assigned missions.</p>
+</div>
+
+        <div class="character">
+    <h2>CZ2128 Delta</h2>
+    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/CZ_Profile_V2.png" alt="CZ2128 Delta">
+    <p><strong>Character:</strong> quiet, precise</p>
+    <p><strong>Race:</strong> Automaton</p>
+    <p><strong>Title:</strong> Sniper of the Pleiades</p>
+    <p>CZ2128 Delta is a quiet and precise member of the Pleiades, specializing in marksmanship. Her calm and measured demeanor makes her an excellent support in operations that require precision and composure.</p>
+</div>
+
+   <div class="character">
+    <h2>Solution Epsilon</h2>
+    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Solution_Epsilon_Profile.png" alt="Solution Epsilon">
+    <p><strong>Character:</strong> cunning, mysterious</p>
+    <p><strong>Race:</strong> Slime</p>
+    <p><strong>Title:</strong> Member of the Pleiades</p>
+    <p>Solution Epsilon is one of Nazarick's combat maids, known for her infiltration abilities. She can manipulate opponents and quickly adapt to situations, making her a dangerous adversary.</p>
+</div>
+
+        <div class="character">
+    <h2>Entoma Vasilissa Zeta</h2>
+    <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Entoma_Profile.png" alt="Entoma Vasilissa Zeta">
+    <p><strong>Character:</strong> devoted, calm</p>
+    <p><strong>Race:</strong> Insectoid</p>
+    <p><strong>Title:</strong> Member of the Pleiades</p>
+    <p>Entoma Vasilissa Zeta is a calm and devoted member of the Pleiades. Her abilities are based on controlling insects, which she uses for combat and espionage. Despite her gentle appearance, she is a dangerous opponent.</p>
+    </div>
+</body>
+</html>
