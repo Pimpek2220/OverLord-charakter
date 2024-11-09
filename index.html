@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Postacie z Overlord</title>
+    <title>Overlord - Wprowadzenie do Postaci</title>
     <style>
         body {
-            font-family: 'Times New Roman', serif;
+            font-family: 'Times New Roman', Arial, Verdana, serif;
             line-height: 1.6;
             background-color: #1a1a1a;
-            color: #b0b0b0;
+            color: #e0e0e0;
             margin: 0;
             padding: 0;
+            font-size: 18px;
         }
         .container {
             width: 95%;
@@ -88,7 +89,7 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .character:hover {
-            transform: scale(1.02);
+            transform: scale(1.05);
             box-shadow: 0 0 20px 10px rgba(153, 0, 0, 0.8);
         }
         .character img {
@@ -98,6 +99,7 @@
             margin-bottom: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
         .character img:hover {
             transform: scale(1.1);
@@ -110,145 +112,185 @@
             padding: 10px;
             border-radius: 5px;
         }
-    </style>
-    <script>
-    function switchLanguage(lang) {
-        
-        localStorage.setItem('preferredLanguage', lang);
-
-     
-        const currentPath = window.location.pathname;
-
-   
-        let targetPage;
-        switch (lang) {
-            case 'pl':
-                targetPage = 'index.html';
-                break;
-            case 'zh':
-                targetPage = 'overlord_characters_page_zh.html';
-                break;
-            case 'de':
-                targetPage = 'overlord_characters_page_de.html';
-                break;
-            case 'uk':
-                targetPage = 'overlord_characters_page_uk.html';
-                break;
-            case 'en':
-                targetPage = 'overlord_characters_page_en.html';
-                break;
-            default:
-                return;
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
         }
-
-        
-        if (!currentPath.includes(targetPage)) {
-            window.location.href = targetPage;
+        .modal-content {
+            margin: 15% auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
         }
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-     
-        const preferredLanguage = localStorage.getItem('preferredLanguage');
-        
-     
-        const currentPageLang = document.documentElement.lang;
-
-      
-        if (preferredLanguage && preferredLanguage !== currentPageLang) {
-            switchLanguage(preferredLanguage);
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
         }
-    });
-
-    function openModal(imgSrc) {
-        var modal = document.getElementById("imgModal");
-        var modalImg = document.getElementById("modalImage");
-        modal.style.display = "block";
-        modalImg.src = imgSrc;
-    }
-
-    function closeModal() {
-        var modal = document.getElementById("imgModal");
-        modal.style.display = "none";
-    }
-
-    function searchCharacter() {
-        let input = document.getElementById('searchInput').value.toLowerCase();
-        let characters = document.getElementsByClassName('character');
-        for (let i = 0; i < characters.length; i++) {
-            let characterName = characters[i].getElementsByTagName('h2')[0].innerText.toLowerCase();
-            if (characterName.includes(input)) {
-                characters[i].style.display = '';
-            } else {
-                characters[i].style.display = 'none';
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            .container {
+                width: 100%;
+                padding: 10px;
+            }
+            .character {
+                margin-bottom: 20px;
+                padding: 10px;
+            }
+            .character img {
+                max-width: 100px;
+            }
+            h1 {
+                font-size: 24px;
             }
         }
-    }
-</script>
 
+        @media (max-width: 480px) {
+            h1, h2 {
+                font-size: 18px;
+            }
+            .dropdown-button {
+                padding: 8px 16px;
+            }
+        }
+    </style>
+    <script>
+        function switchLanguage(lang) {
+            localStorage.setItem('preferredLanguage', lang);
+            if (lang === 'pl') {
+                window.location.href = 'index.html';
+            } else if (lang === 'zh') {
+                window.location.href = 'overlord_characters_page_zh.html';
+            } else if (lang === 'de') {
+                window.location.href = 'overlord_characters_page_de.html';
+            } else if (lang === 'uk') {
+                window.location.href = 'overlord_characters_page_uk.html';
+            } else if (lang === 'en') {
+                window.location.href = 'overlord_characters_page_en.html';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const preferredLanguage = localStorage.getItem('preferredLanguage');
+            if (preferredLanguage) {
+                switchLanguage(preferredLanguage);
+            }
+        });
+
+        function openModal(imgSrc) {
+            var modal = document.getElementById("imgModal");
+            var modalImg = document.getElementById("modalImage");
+            modal.style.display = "block";
+            modalImg.src = imgSrc;
+        }
+
+        function closeModal() {
+            var modal = document.getElementById("imgModal");
+            modal.style.display = "none";
+        }
+
+        function searchCharacter() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let characters = document.getElementsByClassName('character');
+            for (let i = 0; i < characters.length; i++) {
+                let characterName = characters[i].getElementsByTagName('h2')[0].innerText.toLowerCase();
+                if (characterName.includes(input)) {
+                    characters[i].style.display = '';
+                } else {
+                    characters[i].style.display = 'none';
+                }
+            }
+        }
+    </script>
 </head>
 <body>
-     <div class="container">
+    <div id="imgModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <div class="container">
+        <h2 style="color: #ffd700; text-align: center;">Wprowadzenie do Postaci</h2>
         <div class="language-switch">
             <div class="dropdown">
-                <button class="dropdown-button">Wybierz język</button>
+                <button class="dropdown-button">Wybierz Język</button>
                 <div class="dropdown-content">
-                    <button onclick="switchLanguage('uk')">Українська</button>
+                    <button onclick="switchLanguage('uk')">Ukraiński</button>
                     <button onclick="switchLanguage('pl')">Polski</button>
-                    <button onclick="switchLanguage('zh')">中文</button>
-                    <button onclick="switchLanguage('de')">Deutsch</button>
-                    <button onclick="switchLanguage('en')">English</button>
+                    <button onclick="switchLanguage('zh')">Chiński</button>
+                    <button onclick="switchLanguage('de')">Niemiecki</button>
+                    <button onclick="switchLanguage('en')">Angielski</button>
                 </div>
             </div>
         </div>
-        <h1>Postacie z Overlord</h1>
+        <div style="text-align: center; margin-bottom: 20px;">
+            <input type="text" id="searchInput" placeholder="Wyszukaj postać..." onkeyup="searchCharacter()" style="padding: 10px; width: 50%; font-size: 16px; border-radius: 5px; border: 1px solid #ffd700;">
+        </div>
+        <h1>Wprowadzenie do Postaci Overlord</h1>
         <h3 style="color: #ffd700; font-style: italic; text-align: center;">Czym jest Overlord?</h3>
-        <p class="highlighted">„Overlord” to niesamowita historia stworzona przez japońskiego autora Kugane Maruyamę, która została zaadaptowana na anime i mangę. Akcja toczy się w wirtualnej rzeczywistości gry „Yggdrasil”, gdzie główny bohater, gracz, który postanawia pozostać w grze tuż przed jej zamknięciem, niespodziewanie odkrywa, że on sam i cała jego gildia zostali przeniesieni do nieznanego świata.</p>
-        <h3 style="color: #ffd700; font-style: italic; text-align: center;">Pierwszy sezon</h3>
-        <p class="highlighted">W pierwszym sezonie Ainz, wcześniej znany jako Suzuki Satoru, zostaje uwięziony w świecie gry Yggdrasil po jej nagłym zamknięciu. Na początku Ainz bada nowe zasady tego świata, odkrywając, że jego moce i atrybuty zostały zachowane, a NPC ożyli i zyskali świadomość. Szybko zdaje sobie sprawę, że musi opracować plan ochrony Grobowca Nazarick oraz podboju otaczającego świata. W miarę postępu fabuły Ainz staje przed różnymi wyzwaniami związanymi z interakcjami z lokalnymi potęgami i frakcjami, które postrzegają go jako zagrożenie lub szansę.</p>
-        <h3 style="color: #ffd700; font-style: italic; text-align: center;">Drugi sezon</h3>
-        <p class="highlighted">W drugim sezonie Ainz umacnia swoją władzę nad Nazarickiem, stawiając czoła różnym siłom i frakcjom, w tym Królestwu Re-Estize i Jasnemu Królestwu. Jego strategiczne działania oraz rosnący wpływ zaczynają budzić zainteresowanie i obawy wśród innych potęg. Ainz realizuje plan rozszerzenia wpływów Nazaricku, testując lojalność swoich podwładnych i manipulując wydarzeniami z ukrycia.</p>
-        <h3 style="color: #ffd700; font-style: italic; text-align: center;">Trzeci sezon</h3>
-        <p class="highlighted">W trzecim sezonie Ainz staje się Królem Magów, rozszerzając swoje terytorium i zdobywając uznanie jako niepokonany lider. Jego sojusze, intrygi i polityczne manewry są narzędziami do umacniania jego dominacji i ustanowienia porządku, który zaspokaja jego ambicje. Pojawiają się nowe wyzwania i przeciwnicy, ale z pomocą wiernych strażników Ainz dąży do absolutnej hegemonii, pokazując swoje bezwzględne podejście do osiągania celów.</p>
-        <h3 style="color: #ffd700; font-style: italic; text-align: center;">Czwarty sezon</h3>
-        <p class="highlighted">W czwartym sezonie Ainz, teraz uznawany za niekwestionowanego władcę, kontynuuje ekspansję Imperium Magów. Jego polityczne intrygi i dyplomatyczne manewry stają się bardziej złożone, gdy zacieśnia relacje z sąsiednimi królestwami oraz przeciwnikami, którzy zaczynają dostrzegać jego rosnącą potęgę jako zagrożenie. Ainz mierzy się z nowymi wyzwaniami zarówno wewnętrznymi, jak i zewnętrznymi, starając się zachować jedność Nazaricku oraz zdobyć poparcie i szacunek innych narodów. Tymczasem nowe tajemnice i starożytne moce zaczynają się ujawniać, zmuszając Ainza i jego lojalnych Strażników do podejmowania decyzji, które zadecydują o przyszłości całego świata.</p>
+        <p class="highlighted">"Overlord" to ekscytująca opowieść stworzona przez japońskiego autora Kugane Maruyamę, która została zaadaptowana na anime i mangę. Historia rozgrywa się w wirtualnej grze "Yggdrasil", gdzie główny bohater decyduje się zostać w grze przed jej zamknięciem, a następnie odkrywa, że on i cała jego gildia zostali przeniesieni do nieznanego świata.</p>
+        <h3 style="color: #ffd700; font-style: italic; text-align: center;">Sezon Pierwszy</h3>
+        <p class="highlighted">W pierwszym sezonie Ainz (oryginalnie znany jako Suzuki Satoru) zostaje uwięziony w świecie gry "Yggdrasil" po jej nagłym zamknięciu. Z początku Ainz bada zasady nowego świata i odkrywa, że jego moce i atrybuty pozostały nienaruszone, a postacie NPC ożyły. Szybko zdaje sobie sprawę z konieczności stworzenia planu ochrony Wielkiego Grobowca Nazarick i podporządkowania sobie otaczającego świata.</p>
+        <h3 style="color: #ffd700; font-style: italic; text-align: center;">Sezon Drugi</h3>
+        <p class="highlighted">W drugim sezonie Ainz konsoliduje swoją władzę nad Nazarick i konfrontuje się z różnymi siłami i frakcjami, w tym z Królestwem Re-Estize oraz Świętym Królestwem. Jego strategiczne działania i rosnący wpływ zaczynają przyciągać uwagę i obawy innych potęg. Wprowadza plan mający na celu rozszerzenie wpływów Nazarick, testując lojalność swoich podwładnych i manipulując wydarzeniami z ukrycia.</p>
+        <h3 style="color: #ffd700; font-style: italic; text-align: center;">Sezon Trzeci</h3>
+        <p class="highlighted">W trzecim sezonie Ainz staje się Królem Magów, rozszerza swoje terytorium i zdobywa uznanie jako niepokonany lider. Jego sojusze, intrygi i polityczne manewry są narzędziami do wzmacniania jego dominacji oraz ustanowienia ładu, który spełni jego cele. Pojawiają się nowe wyzwania i przeciwnicy, ale Ainz, wspierany przez swoich lojalnych strażników, zmierza ku absolutnej hegemonii, pokazując swoje bezwzględne podejście do osiągania zamierzonych celów.</p>
+        <h3 style="color: #ffd700; font-style: italic; text-align: center;">Sezon Czwarty</h3>
+        <p class="highlighted">W czwartym sezonie Ainz, teraz uznawany za niekwestionowanego władcę, kontynuuje rozszerzanie wpływów Cesarstwa Magów. Jego polityczne intrygi i dyplomatyczne manewry stają się bardziej skomplikowane, gdy zacieśnia relacje z sąsiednimi królestwami oraz tymi, którzy dostrzegają jego rosnącą potęgę. Ainz mierzy się z nowymi wyzwaniami, zarówno wewnętrznymi, jak i zewnętrznymi, starając się zachować jedność Nazarick oraz zdobyć poparcie i szacunek innych nacji.</p>
 
         <div class="character">
             <h2>Ainz Ooal Gown</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Ainz_Anime_Updated.png" alt="Ainz Ooal Gown">
-            <p><strong>Charakter:</strong> chłodny, kalkulacyjny</p>
-            <p><strong>Rasa:</strong> nieumarły</p>
-            <p><strong>Tytuł:</strong> Król Magów</p>
-            <p>Ainz jest nieśmiertelnym arcymagiem oraz władcą Podziemnego Grobowca Nazarick. Posiada ogromną moc i wielkie zasoby. Jest mistrzem planowania i przewidywania, co czyni go wyjątkowym liderem.</p>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Ainz_Anime_Updated.png" alt="Ainz Ooal Gown, nieumarły władca Nazarick, ubrany w charakterystyczną czarną zbroję" onclick="openModal(this.src)">
+            <p><strong>Charakter:</strong> Spokojny, Kalkulacyjny</p>
+            <p><strong>Rasa:</strong> Nieumarły</p>
+            <p><strong>Tytył:</strong> Król Magów</p>
+            <p>Ainz to nieśmiertelny arcymag i władca Wielkiego Grobowca Nazarick. Posiada ogromną moc i zasoby, co czyni go mistrzem planowania i przewidywania, a także wybitnym liderem.</p>
         </div>
 
         <div class="character">
             <h2>Shalltear Bloodfallen</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Shalltear_Anime_Updated.png" alt="Shalltear Bloodfallen">
-            <p><strong>Charakter:</strong> fanatyczna, nieprzewidywalna</p>
-            <p><strong>Rasa:</strong> wampir</p>
-            <p><strong>Tytuł:</strong> Wojownicza Dziewczyna Krwi</p>
-            <p>Shalltear jest jedną z najpotężniejszych Strażników, która uwielbia i czci Ainz'a. Jest znana z bezwzględnej natury i nieprzewidywalnego zachowania w walce.</p>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Shalltear_Anime_Updated.png" alt="Shalltear Bloodfallen, wampir ubrany w czerwoną, zdobioną suknię" onclick="openModal(this.src)">
+            <p><strong>Charakter:</strong> Fanatyczna, Nieprzewidywalna</p>
+            <p><strong>Rasa:</strong> Wampir</p>
+            <p><strong>Tytył:</strong> Waleczna Służebna</p>
+            <p>Shalltear to jedna z najpotężniejszych strażników, oddana Ainzowi. Jest znana ze swojego bezwzględnego zachowania w walce i nieprzewidywalności.</p>
         </div>
 
         <div class="character">
             <h2>Albedo</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Albedo_Anime_Updated.png" alt="Albedo">
-            <p><strong>Charakter:</strong> lojalna, fanatyczna</p>
-            <p><strong>Rasa:</strong> demon</p>
-            <p><strong>Tytuł:</strong> Strażniczka Generalna</p>
-            <p>Albedo jest generalną zarządczynią Strażników, obdarzoną obsesyjną miłością do Ainz'a. Jest piękna, inteligentna i bardzo lojalna wobec swojego pana.</p>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Albedo_Anime_Updated.png" alt="Albedo, demon ubrany w białą suknię, z czarnymi skrzydłami" onclick="openModal(this.src)">
+            <p><strong>Charakter:</strong> Lojalna, Fanatyczna</p>
+            <p><strong>Rasa:</strong> Demon</p>
+            <p><strong>Tytył:</strong> Główna Strażniczka</p>
+            <p>Albedo jest główną strażniczką wszystkich strażników, szaleńczo zakochaną w Ainzu. Jest piękna, inteligentna i absolutnie lojalna wobec swojego pana.</p>
         </div>
 
         <div class="character">
             <h2>Demiurge</h2>
-            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Demiurge_Anime_Updated.png" alt="Demiurge">
-            <p><strong>Charakter:</strong> przebiegły, racjonalny</p>
-            <p><strong>Rasa:</strong> demon</p>
-            <p><strong>Tytuł:</strong> Twórca Piekielnych Płomieni</p>
-            <p>Demiurge jest najbardziej inteligentnym ze Strażników, o średnich zdolnościach bojowych. Jego strategiczne myślenie i umiejętność przewidywania ruchów wrogów są niezrównane.</p>
+            <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Demiurge_Anime_Updated.png" alt="Demiurge, demon ubrany w czarną garnitur, uśmiechnięty" onclick="openModal(this.src)">
+            <p><strong>Charakter:</strong> Przebiegły, Racjonalny</p>
+            <p><strong>Rasa:</strong> Demon</p>
+            <p><strong>Tytył:</strong> Twórca Ognistych Płomieni</p>
+            <p>Demiurge to najinteligentniejszy z pośród strażników. Mimo umiarkowanych zdolności bojowych jego strategiczne myślenie i zdolność przewidywania ruchów wrogów są niezrównane.</p>
         </div>
-
+    </div>
         <div class="character">
             <h2>Mare</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Mare_Anime_Updated.png" alt="Mare">
