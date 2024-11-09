@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Postacie z Overlord</title>
+    <title>Overlord 角色</title>
     <style>
         body {
             font-family: 'Times New Roman', serif;
@@ -31,22 +31,52 @@
             padding-bottom: 10px;
         }
         .language-switch {
+            position: relative;
             display: flex;
             justify-content: flex-end;
             margin-bottom: 15px;
         }
-        .language-switch button {
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-button {
             background-color: #ffd700;
             color: #1a1a1a;
             border: none;
             padding: 10px 20px;
-            margin-left: 10px;
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
         }
-        .language-switch button:hover {
+        .dropdown-button:hover {
             background-color: #e5c100;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #2a2a2a;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .dropdown-content button {
+            background-color: #ffd700;
+            color: #1a1a1a;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .dropdown-content button:hover {
+            background-color: #e5c100;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
         }
         .character {
             margin-bottom: 30px;
@@ -75,11 +105,16 @@
         .character p {
             margin: 5px 0;
         }
+        .highlighted {
+            border: 2px solid #ffd700;
+            padding: 10px;
+            border-radius: 5px;
+        }
     </style>
-        <script>
+    <script>
         function switchLanguage(lang) {
             if (lang === 'pl') {
-                window.location.href = 'overlord_characters_page_pl.html';
+                window.location.href = 'index.html';
             } else if (lang === 'zh') {
                 window.location.href = 'overlord_characters_page_zh.html';
             } else if (lang === 'de') {
@@ -91,24 +126,25 @@
     </script>
 </head>
 <body>
-     <div class="container">
+    <div class="container">
         <div class="language-switch">
-            <button onclick="switchLanguage('uk')">Українська</button>
-            <button onclick="switchLanguage('pl')">Polski</button>
-            <button onclick="switchLanguage('zh')">中文</button>
-            <button onclick="switchLanguage('de')">Deutsch</button>
+            <div class="dropdown">
+                <button class="dropdown-button">选择语言</button>
+                <div class="dropdown-content">
+                    <button onclick="switchLanguage('uk')">Українська</button>
+                    <button onclick="switchLanguage('pl')">Polski</button>
+                    <button onclick="switchLanguage('zh')">中文</button>
+                    <button onclick="switchLanguage('de')">Deutsch</button>
+                </div>
+            </div>
         </div>
-        <h1>Overlord角色</h1>
-        <p>《Overlord》是一部由日本作家丸山くがね创作的轻小说，并改编为动画和漫画。故事设定在一个虚拟现实的游戏《Yggdrasil》中，主角是一位玩家，在游戏宣布停服的最后时刻，他选择留下，却意外地发现自己和整个公会基地一起穿越到一个陌生的异世界。
-
-主角是铃木悟，一个在现实中并不起眼的上班族，在游戏中化身为强大的不死之王“安兹·乌尔·恭”（Ainz Ooal Gown），也被称作“飞鼠”（Momon）。他决定探索新世界并逐渐走上统治世界的道路。他手下有一群忠心耿耿、实力强大的NPC仆从，他们在穿越后变成了有意识的生命体，这使得整个故事充满了策略、阴谋和冒险。
-
-《Overlord》的剧情主要讲述了安兹在新世界中的征战、与其他势力的斗争和发展，同时也探索了关于权力、伦理和统治的深层主题。作品以其复杂的世界观、细腻的人物刻画和暗黑系的剧情而受到广泛好评。
-
-<p>在第一季中，原本被称为铃木悟的安兹在Yggdrasil游戏突然关闭后被困在游戏世界中。一开始，安兹探索这个新世界的规则，发现他的力量和属性被保留下来，而NPC角色变得有了自己的意志。他迅速意识到需要制定保护纳萨力克大坟墓并统治周围世界的计划。随着事件的发展，安兹面临着与本地势力和不同派系的互动，这些派系将他视为威胁或机会。</p>
-<p>在第二季中，安兹巩固了对纳萨力克的统治，与不同的力量和派系对抗，包括Re-Estize王国、圣光王国及其他组织。他的战略行动和日益增长的影响力开始引起其他势力的关注和担忧。他实施了扩展纳萨力克影响力的计划，测试手下的忠诚并在幕后操纵事件。</p>
-<p>第三季展示了安兹如何成为魔导王，扩张领土并被公认为不可战胜的领袖。他的联盟、阴谋和政治手段是增加其支配地位和实现目标的工具。新的挑战和敌人出现在他的面前，但在忠诚守护者的支持下，安兹朝着绝对霸权迈进，展现出他无情达成目标的手段。</p>
-<p></p>在第四季中，安兹现在被视为无可争议的统治者，继续努力扩大魔导国的影响力。随着他加深与邻国及敌人的关系，这些敌人逐渐意识到他的不断增长的力量，他的政治阴谋和外交手段变得更加复杂。安兹面临着来自内部和外部的挑战，努力维持纳萨力克的统一，并赢得其他国家的支持和尊重。同时，新的秘密和古老的力量开始浮现，迫使安兹和他的忠实守护者做出决定，这将决定整个世界的未来。</p>
+        <h1>Overlord 角色</h1>
+        <p class="highlighted">《Overlord》是日本作家丸山くがね创作的轻小说，后来被改编成了动画和漫画。故事发生在虚拟现实游戏《Yggdrasil》中，主角在游戏即将关闭时决定留在游戏中，却意外发现他自己和他的整个公会都被传送到了一个未知的世界。</p>
+        <p class="highlighted">在第一季中，原名为铃木悟的安兹在游戏Yggdrasil突然关闭后被困在游戏世界中。一开始，安兹探索这个世界的新规则，发现他的力量和属性都得以保留，且NPC角色都活了过来，开始表现出自己的意志。他很快意识到需要制定一个计划，以保护纳萨力克大坟墓并征服周围的世界。随着事件的发展，安兹面对来自本地势力和各个派系的挑战，这些势力将他视为威胁或机会。</p>
+        <p class="highlighted">在第二季中，安兹加强了对纳萨力克的统治，与包括瑞斯提杰王国、光明王国等在内的各种势力和派系对抗。他的战略行动和日益增长的影响力开始引起其他强国的关注和担忧。他实施了扩展纳萨力克影响力的计划，测试属下的忠诚度，并从幕后操纵事件。</p>
+        <p class="highlighted">第三季中，安兹成为了魔导王，扩展了自己的领地，并获得了作为无敌领袖的认可。他的联盟、阴谋和政治手段是增强统治力和建立秩序的工具，这些都服务于他的目标和野心。新的挑战和敌人不断出现，但在忠实守护者的支持下，安兹朝着绝对霸权的目标前进，展现出对实现目标的无情态度。</p>
+        <p class="highlighted">第四季中，安兹被公认为无可争议的统治者，他继续扩展魔导王帝国的影响力。当他加强与周边王国和敌人的关系时，他的政治阴谋和外交手段变得更加复杂，这些王国和敌人开始注意到他的不断增强的力量。安兹面对来自内部和外部的新挑战，努力保持纳萨力克的团结，并赢得其他国家的支持和尊重。同时，新的秘密和古老的力量开始显现，迫使安兹及其忠实的守护者做出决定，这些决定将决定整个世界的未来。</p>
+       
         <div class="character">
             <h2>安兹·乌尔·恭</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Ainz_Anime_Updated.png" alt="Ainz Ooal Gown">
