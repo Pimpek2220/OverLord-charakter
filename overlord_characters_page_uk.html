@@ -118,10 +118,10 @@
         
         localStorage.setItem('preferredLanguage', lang);
 
-       
+        
         const currentPath = window.location.pathname;
 
-       
+        
         let targetPage;
         switch (lang) {
             case 'pl':
@@ -143,7 +143,7 @@
                 return;
         }
 
-       
+        
         if (!currentPath.endsWith(targetPage)) {
             window.location.href = targetPage;
         }
@@ -153,7 +153,7 @@
         
         const preferredLanguage = localStorage.getItem('preferredLanguage');
         
-       
+        
         const currentPageLang = document.documentElement.lang;
 
         
@@ -161,6 +161,31 @@
             switchLanguage(preferredLanguage);
         }
     });
+
+    function openModal(imgSrc) {
+        var modal = document.getElementById("imgModal");
+        var modalImg = document.getElementById("modalImage");
+        modal.style.display = "block";
+        modalImg.src = imgSrc;
+    }
+
+    function closeModal() {
+        var modal = document.getElementById("imgModal");
+        modal.style.display = "none";
+    }
+
+    function searchCharacter() {
+        let input = document.getElementById('searchInput').value.toLowerCase();
+        let characters = document.getElementsByClassName('character');
+        for (let i = 0; i < characters.length; i++) {
+            let characterName = characters[i].getElementsByTagName('h2')[0].innerText.toLowerCase();
+            if (characterName.includes(input)) {
+                characters[i].style.display = '';
+            } else {
+                characters[i].style.display = 'none';
+            }
+        }
+    }
 </script>
 
 
