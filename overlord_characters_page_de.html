@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Postacie z Overlord</title>
+    <title>Charaktere aus Overlord</title>
     <style>
         body {
             font-family: 'Times New Roman', serif;
@@ -31,22 +31,52 @@
             padding-bottom: 10px;
         }
         .language-switch {
+            position: relative;
             display: flex;
             justify-content: flex-end;
             margin-bottom: 15px;
         }
-        .language-switch button {
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-button {
             background-color: #ffd700;
             color: #1a1a1a;
             border: none;
             padding: 10px 20px;
-            margin-left: 10px;
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
         }
-        .language-switch button:hover {
+        .dropdown-button:hover {
             background-color: #e5c100;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #2a2a2a;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .dropdown-content button {
+            background-color: #ffd700;
+            color: #1a1a1a;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .dropdown-content button:hover {
+            background-color: #e5c100;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
         }
         .character {
             margin-bottom: 30px;
@@ -75,11 +105,16 @@
         .character p {
             margin: 5px 0;
         }
+        .highlighted {
+            border: 2px solid #ffd700;
+            padding: 10px;
+            border-radius: 5px;
+        }
     </style>
-        <script>
+    <script>
         function switchLanguage(lang) {
             if (lang === 'pl') {
-                window.location.href = 'overlord_characters_page_pl.html';
+                window.location.href = 'index.html'';
             } else if (lang === 'zh') {
                 window.location.href = 'overlord_characters_page_zh.html';
             } else if (lang === 'de') {
@@ -91,24 +126,24 @@
     </script>
 </head>
 <body>
-     <div class="container">
+    <div class="container">
         <div class="language-switch">
-            <button onclick="switchLanguage('uk')">Українська</button>
-            <button onclick="switchLanguage('pl')">Polski</button>
-            <button onclick="switchLanguage('zh')">中文</button>
-            <button onclick="switchLanguage('de')">Deutsch</button>
+            <div class="dropdown">
+                <button class="dropdown-button">Sprache wählen</button>
+                <div class="dropdown-content">
+                    <button onclick="switchLanguage('uk')">Українська</button>
+                    <button onclick="switchLanguage('pl')">Polski</button>
+                    <button onclick="switchLanguage('zh')">中文</button>
+                    <button onclick="switchLanguage('de')">Deutsch</button>
+                </div>
+            </div>
         </div>
         <h1>Charaktere aus Overlord</h1>
-        <p>„Overlord“ ist ein Light-Novel, das vom japanischen Autor Kugane Maruyama geschrieben wurde und später als Anime und Manga adaptiert wurde. Die Geschichte spielt in der virtuellen Realität des Spiels „Yggdrasil“, wo der Protagonist, ein Spieler, der sich entscheidet, bis zur letzten Minute im Spiel zu bleiben, überraschend feststellt, dass er zusammen mit der gesamten Basis seiner Gilde in eine unbekannte Welt versetzt wird.
-
-Der Protagonist, Suzuki Satoru, ist im realen Leben ein unscheinbarer Büroangestellter, der sich im Spiel in den mächtigen untoten Herrscher „Ainz Ooal Gown“, auch bekannt als „Momon“, verwandelt. Er beschließt, die neue Welt zu erkunden und strebt allmählich nach deren Eroberung. Er wird von seinen treuen und äußerst mächtigen NPC-Dienern begleitet, die nach der Versetzung ein eigenes Bewusstsein erlangen, was der Geschichte eine Fülle an Strategie, Intrigen und Abenteuern verleiht.
-
-Die Handlung von „Overlord“ erzählt von Ainzs Kämpfen in der neuen Welt, seinen Auseinandersetzungen mit anderen Mächten und seiner Entwicklung, während sie Themen wie Macht, Ethik und Herrschaft erforscht. Das Werk wird für seine komplexe Weltgestaltung, detaillierte Charakterdarstellungen und die düstere Handlung hoch gelobt.
-        <p>In der ersten Staffel wird Ainz, ehemals bekannt als Suzuki Satoru, nach der plötzlichen Schließung des Spiels Yggdrasil in der Spielwelt gefangen. Anfangs erkundet Ainz die neuen Regeln dieser Welt, entdeckt, dass seine Kräfte und Attribute erhalten geblieben sind und NPCs ein Eigenleben entwickelt haben. Schnell erkennt er die Notwendigkeit, einen Plan zur Sicherung des Großen Grabes von Nazarick zu erstellen und die umliegende Welt zu unterwerfen. Im Laufe der Ereignisse steht Ainz vor Herausforderungen durch Interaktionen mit lokalen Mächten und verschiedenen Fraktionen, die ihn als Bedrohung oder Gelegenheit betrachten.<\p>
-        <p>In der zweiten Staffel festigt Ainz seine Herrschaft über Nazarick und stellt sich verschiedenen Mächten und Fraktionen, darunter das Königreich Re-Estize, das Heilige Königreich und andere Gruppen. Seine strategischen Handlungen und sein wachsender Einfluss erregen die Aufmerksamkeit und Besorgnis anderer Mächte. Er führt einen Plan ein, um den Einfluss von Nazarick zu erweitern und testet die Loyalität seiner Untergebenen, während er Ereignisse aus dem Hintergrund manipuliert.<\p>
-        <p>In der dritte Staffel zeigt, wie Ainz zum König der Magier wird, sein Territorium ausweitet und als unbesiegbarer Anführer Anerkennung gewinnt. Seine Allianzen, Intrigen und politischen Manöver sind Werkzeuge zur Steigerung der Dominanz und zur Etablierung einer Ordnung, die seinen Zielen und Ambitionen dient. Neue Herausforderungen und Gegner stellen sich ihm in den Weg, doch Ainz, unterstützt von seinen loyalen Wächtern, strebt unbeirrt nach absoluter Hegemonie und zeigt sein rücksichtsloses Vorgehen zur Erreichung seiner Ziele.<\p>
-        <p>In der vierten Staffel setzt Ainz, der nun als unangefochtener Herrscher anerkannt ist, seine Bemühungen fort, den Einfluss des Reiches des Magierkönigs auszubauen. Seine politischen Intrigen und diplomatischen Manöver werden komplexer, während er seine Beziehungen zu benachbarten Königreichen und Feinden vertieft, die seine wachsende Macht erkennen. Ainz steht vor neuen Herausforderungen, sowohl inneren als auch äußeren, und versucht, die Einheit von Nazarick zu bewahren sowie die Unterstützung und den Respekt anderer Nationen zu gewinnen. Währenddessen kommen neue Geheimnisse und uralte Mächte ans Licht, die Ainz und seine loyalen Wächter zu Entscheidungen zwingen, die über die Zukunft der gesamten Welt bestimmen.</p>
-
+        <p class="highlighted">„Overlord“ ist eine Light Novel, geschrieben vom japanischen Autor Kugane Maruyama, die in Anime und Manga adaptiert wurde. Die Geschichte spielt in der virtuellen Realität des Spiels „Yggdrasil“, in dem der Protagonist, ein Spieler, der beschließt, kurz vor der Schließung des Spiels darin zu bleiben, überraschend feststellt, dass er selbst und die gesamte Gildenbasis in eine unbekannte Welt transportiert wurden.</p>
+        <p class="highlighted">Im ersten Staffel wird Ainz, früher bekannt als Suzuki Satoru, nach der plötzlichen Schließung des Spiels Yggdrasil in der Spielwelt gefangen. Zunächst untersucht Ainz die neuen Regeln dieser Welt und entdeckt, dass seine Kräfte und Attribute erhalten geblieben sind und die NPC-Charaktere lebendig geworden sind und eigenen Willen zeigen. Schnell erkennt er die Notwendigkeit, einen Plan zur Verteidigung des Grabes von Nazarick zu erstellen und die umliegende Welt zu erobern. Mit der Weiterentwicklung der Ereignisse steht Ainz vor Herausforderungen, die sich aus den Interaktionen mit lokalen Mächten und verschiedenen Fraktionen ergeben, die in ihm eine Bedrohung oder eine Chance sehen.</p>
+        <p class="highlighted">In der zweiten Staffel festigt Ainz seine Macht über Nazarick und konfrontiert verschiedene Kräfte und Fraktionen, darunter das Königreich Re-Estize, das Lichte Königreich und andere Gruppen. Seine strategischen Handlungen und der zunehmende Einfluss erregen die Aufmerksamkeit und Besorgnis anderer Mächte. Er führt einen Plan zur Erweiterung des Einflusses von Nazarick ein, testet die Loyalität seiner Untergebenen und manipuliert die Ereignisse aus dem Verborgenen.</p>
+        <p class="highlighted">In der dritten Staffel wird gezeigt, wie Ainz zum König der Magier wird, sein Territorium erweitert und als unbesiegter Anführer anerkannt wird. Seine Allianzen, Intrigen und politischen Manöver sind Werkzeuge zur Stärkung der Dominanz und zur Schaffung einer Ordnung, die seinen Zielen und Ambitionen entspricht. Neue Herausforderungen und Feinde tauchen auf seinem Weg auf, aber Ainz, unterstützt von seinen treuen Wächtern, bewegt sich in Richtung absoluter Hegemonie und zeigt dabei seine rücksichtslosen Ansätze zur Erreichung der gesetzten Ziele.</p>
+        <p class="highlighted">In der vierten Staffel setzt Ainz, jetzt als unangefochtener Herrscher anerkannt, seine Bestrebungen fort, den Einfluss des Magierkönigreichs auszubauen. Seine politischen Intrigen und diplomatischen Manöver werden komplexer, während er die Beziehungen zu benachbarten Königreichen und Feinden vertieft, die seine wachsende Macht bemerken. Ainz steht vor neuen Herausforderungen, sowohl intern als auch extern, und bemüht sich, die Einheit von Nazarick zu bewahren sowie die Unterstützung und den Respekt anderer Nationen zu gewinnen. Währenddessen treten neue Geheimnisse und alte Kräfte ans Licht, die Ainz und seine treuen Wächter dazu zwingen, Entscheidungen zu treffen, die über die Zukunft der ganzen Welt bestimmen werden.</p>
         <div class="character">
             <h2>Ainz Ooal Gown</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Ainz_Anime_Updated.png" alt="Ainz Ooal Gown">
