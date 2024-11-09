@@ -146,65 +146,85 @@
             cursor: pointer;
         }
         @media (max-width: 768px) {
-            .container {
-                width: 100%;
-                padding: 10px;
-            }
-            .character {
-                margin-bottom: 20px;
-                padding: 10px;
-            }
-            .character img {
-                max-width: 100px;
-            }
-            h1 {
-                font-size: 24px;
-            }
-        }
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+    .character {
+        margin-bottom: 20px;
+        padding: 10px;
+    }
+    .character img {
+        max-width: 100px;
+    }
+    h1 {
+        font-size: 1.5em;
+    }
+    .dropdown-button {
+        font-size: 1em;
+        padding: 8px 12px;
+    }
+}
 
-        @media (max-width: 480px) {
-            h1, h2 {
-                font-size: 18px;
-            }
-            .dropdown-button {
-                padding: 8px 16px;
-            }
-        }
+@media (max-width: 480px) {
+    h1, h2 {
+        font-size: 1.2em;
+    }
+    .dropdown-button {
+        font-size: 0.9em;
+        padding: 8px 10px;
+    }
+    .dropdown-content button {
+        font-size: 0.9em;
+        padding: 8px;
+    }
+}
+
     </style>
     <script>
     function switchLanguage(lang) {
-        // 存储首选语言
+      
         localStorage.setItem('preferredLanguage', lang);
 
-        // 检查当前页面并跳转到相应页面（仅在不匹配时执行跳转）
-        if ((lang === 'pl' && !window.location.href.includes('index.html')) ||
-            (lang === 'zh' && !window.location.href.includes('overlord_characters_page_zh.html')) ||
-            (lang === 'de' && !window.location.href.includes('overlord_characters_page_de.html')) ||
-            (lang === 'uk' && !window.location.href.includes('overlord_characters_page_uk.html')) ||
-            (lang === 'en' && !window.location.href.includes('overlord_characters_page_en.html'))) {
-            
-            if (lang === 'pl') {
-                window.location.href = 'index.html';
-            } else if (lang === 'zh') {
-                window.location.href = 'overlord_characters_page_zh.html';
-            } else if (lang === 'de') {
-                window.location.href = 'overlord_characters_page_de.html';
-            } else if (lang === 'uk') {
-                window.location.href = 'overlord_characters_page_uk.html';
-            } else if (lang === 'en') {
-                window.location.href = 'overlord_characters_page_en.html';
-            }
+     
+        const currentPath = window.location.pathname;
+
+      
+        let targetPage;
+        switch (lang) {
+            case 'pl':
+                targetPage = 'index.html';
+                break;
+            case 'zh':
+                targetPage = 'overlord_characters_page_zh.html';
+                break;
+            case 'de':
+                targetPage = 'overlord_characters_page_de.html';
+                break;
+            case 'uk':
+                targetPage = 'overlord_characters_page_uk.html';
+                break;
+            case 'en':
+                targetPage = 'overlord_characters_page_en.html';
+                break;
+            default:
+                return;
+        }
+
+
+        if (!currentPath.includes(targetPage)) {
+            window.location.href = targetPage;
         }
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-        // 获取首选语言
+    document.addEventListener('DOMContentLoaded', function () {
+        
         const preferredLanguage = localStorage.getItem('preferredLanguage');
-
-        // 获取当前页面的语言
+        
+        
         const currentPageLang = document.documentElement.lang;
 
-        // 如果首选语言和当前页面不匹配，则切换语言
+       
         if (preferredLanguage && preferredLanguage !== currentPageLang) {
             switchLanguage(preferredLanguage);
         }
@@ -235,6 +255,7 @@
         }
     }
 </script>
+
 
 </head>
 <body>
