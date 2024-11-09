@@ -113,13 +113,13 @@
     </style>
     <script>
     function switchLanguage(lang) {
-        // 存储首选语言
+        
         localStorage.setItem('preferredLanguage', lang);
 
-        // 确保不进行重复跳转
+     
         const currentPath = window.location.pathname;
 
-        // 根据语言选择目标页面路径
+   
         let targetPage;
         switch (lang) {
             case 'pl':
@@ -141,20 +141,20 @@
                 return;
         }
 
-        // 只有当目标页面与当前页面不同的时候才跳转
+        
         if (!currentPath.includes(targetPage)) {
             window.location.href = targetPage;
         }
     }
 
     document.addEventListener('DOMContentLoaded', function () {
-        // 获取首选语言
+     
         const preferredLanguage = localStorage.getItem('preferredLanguage');
         
-        // 获取当前页面的语言
+     
         const currentPageLang = document.documentElement.lang;
 
-        // 如果首选语言和当前页面不匹配，则切换语言
+      
         if (preferredLanguage && preferredLanguage !== currentPageLang) {
             switchLanguage(preferredLanguage);
         }
