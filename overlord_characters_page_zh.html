@@ -236,28 +236,36 @@
     }
 
     function searchCharacter() {
-        let input = document.getElementById('searchInput').value.toLowerCase();
-        let suggestionBox = document.getElementById('suggestionBox');
-        suggestionBox.innerHTML = '';
-        let found = false;
-        charactersData.forEach(character => {
-            for (const lang in character.name) {
-                if (character.name[lang].toLowerCase().includes(input)) {
-                    const suggestionItem = document.createElement('div');
-                    suggestionItem.classList.add('suggestion-item');
-                    suggestionItem.innerHTML = `<img src="${character.image}" alt="${character.name[lang]}"><span>${character.name[lang]}</span>`;
-                    suggestionItem.onclick = function() {
-                        document.getElementById(character.name.pl.replace(/\s/g, '')).scrollIntoView({ behavior: 'smooth' });
-                        suggestionBox.style.display = 'none';
-                    };
-                    suggestionBox.appendChild(suggestionItem);
-                    found = true;
-                    break;
-                }
+    let input = document.getElementById('searchInput').value.toLowerCase();
+    let suggestionBox = document.getElementById('suggestionBox');
+    suggestionBox.innerHTML = '';
+    let found = false;
+    charactersData.forEach(character => {
+        for (const lang in character.name) {
+            if (character.name[lang].toLowerCase().includes(input)) {
+                const suggestionItem = document.createElement('div');
+                suggestionItem.classList.add('suggestion-item');
+                suggestionItem.innerHTML = `<img src="${character.image}" alt="${character.name[lang]}"><span>${character.name[lang]}</span>`;
+                
+                
+                suggestionItem.onclick = function() {
+                    const characterId = character.name.en.replace(/\s/g, '');
+                    const targetElement = document.getElementById(characterId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                    suggestionBox.style.display = 'none';
+                };
+
+                suggestionBox.appendChild(suggestionItem);
+                found = true;
+                break;
             }
-        });
-        suggestionBox.style.display = found ? 'block' : 'none';
-    }
+        }
+    });
+    suggestionBox.style.display = found ? 'block' : 'none';
+}
+
     </script>
 </head>
 <body>
@@ -294,7 +302,7 @@
         <h3 style="color: #ffd700; font-style: italic; text-align: center;">第四季</h3>
         <p class="highlighted">在第四季中，安兹被公认为无可争议的统治者，继续扩大魔导国的影响力。他的政治阴谋和外交手段变得更加复杂，因为他与邻国和那些将他日益增长的力量视为威胁的人建立了关系。安兹面临新的内外挑战，努力保持纳萨力克的团结，并获得其他国家的支持和尊重。同时，新的秘密和古老的力量开始显现，迫使安兹和他的忠诚守护者做出决定，这将决定整个世界的命运。</p>
 
-        <div class="character">
+        <div class="character" id="AinzOoalGown">
             <h2>安兹·乌尔·恭</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Ainz_Anime_Updated.png" alt="安兹·乌尔·恭" onclick="openModal(this.src)">
             <p><strong>性格:</strong> 冷静，深思熟虑</p>
@@ -303,7 +311,7 @@
             <p>安兹是一位不朽的大魔法师，也是纳萨力克地下大坟墓的统治者。他拥有巨大的力量和资源，是一位出色的计划和预见大师。</p>
         </div>
 
-        <div class="character">
+        <div class="character" id="ShalltearBloodfallen">
             <h2>夏提雅·布拉德弗伦</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Shalltear_Anime_Updated.png" alt="夏提雅·布拉德弗伦" onclick="openModal(this.src)">
             <p><strong>性格:</strong> 狂热，不可预测</p>
@@ -312,7 +320,7 @@
             <p>夏提雅是最强大的守护者之一，她崇拜并敬仰安兹。她以无情的天性和在战斗中的不可预测性而闻名。</p>
         </div>
 
-        <div class="character">
+        <div class="character" id="Demiurge">
             <h2>雅儿贝德</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Albedo_Anime_Updated.png" alt="雅儿贝德" onclick="openModal(this.src)">
             <p><strong>性格:</strong> 忠诚，狂热</p>
@@ -321,7 +329,7 @@
             <p>雅儿贝德是守护者的总管，对安兹怀有深深的执着之情。她美丽、聪明，对她的主人极为忠诚。</p>
         </div>
 
-        <div class="character">
+        <div class="character" id="NarberalGamma">
             <h2>迪米乌哥斯</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Demiurge_Anime_Updated.png" alt="迪米乌哥斯" onclick="openModal(this.src)">
             <p><strong>性格:</strong> 狡猾，理性</p>
@@ -330,7 +338,7 @@
             <p>迪米乌哥斯是最聪明的守护者之一，拥有中等的战斗能力。他的战略思维和预测敌人行动的能力无人能及。</p>
         </div>
 
-        <div class="character">
+        <div class="character" id="NarberalGamma">
             <h2>娜贝拉尔·伽马</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Narberal_Gamma_Profile.png" alt="娜贝拉尔·伽马" onclick="openModal(this.src)">
             <p><strong>性格:</strong> 冷酷，专业</p>
@@ -339,7 +347,7 @@
             <p>娜贝拉尔·伽马是纳萨力克的战斗女仆之一，也是普莱亚德斯的忠实成员。她以对人类冷酷的态度和出色的魔法能力而闻名，是战斗中的重要支持力量。</p>
         </div>
 
-        <div class="character">
+        <div class="character" id="YuriAlpha">
             <h2>尤莉·阿尔法</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Yuri_Alpha_V2.png" alt="尤莉·阿尔法" onclick="openModal(this.src)">
             <p><strong>性格:</strong> 负责，冷静</p>
@@ -348,7 +356,7 @@
             <p>尤莉·阿尔法是普莱亚德斯战斗女仆组的领队。她的职责是协调团队的行动并维护秩序。她以纪律、忠诚和冷静的性格而闻名，是团队中的权威人物。</p>
         </div>
 
-        <div class="character">
+        <div class="character" id="LupusreginaBeta">
             <h2>露普斯雷吉纳·贝塔</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Lupusregina_Beta.png" alt="露普斯雷吉纳·贝塔" onclick="openModal(this.src)">
             <p><strong>性格:</strong> 顽皮，忠诚</p>
@@ -357,7 +365,7 @@
             <p>露普斯雷吉纳·贝塔是普莱亚德斯中的一员，以其顽皮的性格著称，常常掩盖了她对纳萨力克的真正忠诚和奉献。尽管她性格顽皮，但在执行任务时非常高效。</p>
         </div>
 
-        <div class="character">
+        <div class="character" id="CZ2128Delta">
             <h2>CZ2128·德尔塔</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/CZ_Profile_V2.png" alt="CZ2128·德尔塔" onclick="openModal(this.src)">
             <p><strong>性格:</strong> 安静，精确</p>
@@ -366,7 +374,7 @@
             <p>CZ2128·德尔塔是普莱亚德斯中的一员，专精于狙击。她冷静且平衡的性格使她在需要精确和控制的任务中表现出色。</p>
         </div>
 
-        <div class="character">
+        <div class="character" id="SolutionEpsilon">
             <h2>索留香·艾普西隆</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Solution_Epsilon_Profile.png" alt="索留香·艾普西隆" onclick="openModal(this.src)">
             <p><strong>性格:</strong> 狡猾，神秘</p>
@@ -375,7 +383,7 @@
             <p>索留香·艾普西隆是纳萨力克的战斗女仆之一，以其渗透能力而闻名。她擅长操纵对手并迅速适应情况，是一个可怕的对手。</p>
         </div>
 
-        <div class="character">
+        <div class="character" id="EntomaVasilissaZeta">
             <h2>恩多玛·瓦西丽萨·泽塔</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Entoma_Profile.png" alt="恩多玛·瓦西丽萨·泽塔" onclick="openModal(this.src)">
             <p><strong>性格:</strong> 忠诚，冷静</p>
