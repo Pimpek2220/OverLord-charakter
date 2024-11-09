@@ -172,53 +172,30 @@
         }
     </style>
     <script>
-        function switchLanguage(lang) {
-            localStorage.setItem('preferredLanguage', lang);
-            if (lang === 'pl') {
-                window.location.href = 'index.html';
-            } else if (lang === 'zh') {
-                window.location.href = 'overlord_characters_page_zh.html';
-            } else if (lang === 'de') {
-                window.location.href = 'overlord_characters_page_de.html';
-            } else if (lang === 'uk') {
-                window.location.href = 'overlord_characters_page_uk.html';
-            } else if (lang === 'en') {
-                window.location.href = 'overlord_characters_page_en.html';
-            }
+    function switchLanguage(lang) {
+        localStorage.setItem('preferredLanguage', lang);
+        if (lang === 'pl' && !window.location.href.includes('index.html')) {
+            window.location.href = 'index.html';
+        } else if (lang === 'zh' && !window.location.href.includes('overlord_characters_page_zh.html')) {
+            window.location.href = 'overlord_characters_page_zh.html';
+        } else if (lang === 'de' && !window.location.href.includes('overlord_characters_page_de.html')) {
+            window.location.href = 'overlord_characters_page_de.html';
+        } else if (lang === 'uk' && !window.location.href.includes('overlord_characters_page_uk.html')) {
+            window.location.href = 'overlord_characters_page_uk.html';
+        } else if (lang === 'en' && !window.location.href.includes('overlord_characters_page_en.html')) {
+            window.location.href = 'overlord_characters_page_en.html';
         }
+    }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const preferredLanguage = localStorage.getItem('preferredLanguage');
-            if (preferredLanguage) {
-                switchLanguage(preferredLanguage);
-            }
-        });
-
-        function openModal(imgSrc) {
-            var modal = document.getElementById("imgModal");
-            var modalImg = document.getElementById("modalImage");
-            modal.style.display = "block";
-            modalImg.src = imgSrc;
+    document.addEventListener('DOMContentLoaded', function() {
+        const preferredLanguage = localStorage.getItem('preferredLanguage');
+        if (preferredLanguage) {
+           
+            switchLanguage(preferredLanguage);
         }
+    });
+</script>
 
-        function closeModal() {
-            var modal = document.getElementById("imgModal");
-            modal.style.display = "none";
-        }
-
-        function searchCharacter() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            let characters = document.getElementsByClassName('character');
-            for (let i = 0; i < characters.length; i++) {
-                let characterName = characters[i].getElementsByTagName('h2')[0].innerText.toLowerCase();
-                if (characterName.includes(input)) {
-                    characters[i].style.display = '';
-                } else {
-                    characters[i].style.display = 'none';
-                }
-            }
-        }
-    </script>
 </head>
 <body>
     <div id="imgModal" class="modal">
