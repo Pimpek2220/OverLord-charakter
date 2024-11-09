@@ -233,28 +233,36 @@
     }
 
     function searchCharacter() {
-        let input = document.getElementById('searchInput').value.toLowerCase();
-        let suggestionBox = document.getElementById('suggestionBox');
-        suggestionBox.innerHTML = '';
-        let found = false;
-        charactersData.forEach(character => {
-            for (const lang in character.name) {
-                if (character.name[lang].toLowerCase().includes(input)) {
-                    const suggestionItem = document.createElement('div');
-                    suggestionItem.classList.add('suggestion-item');
-                    suggestionItem.innerHTML = `<img src="${character.image}" alt="${character.name[lang]}"><span>${character.name[lang]}</span>`;
-                    suggestionItem.onclick = function() {
-                        document.getElementById(character.name.pl.replace(/\s/g, '')).scrollIntoView({ behavior: 'smooth' });
-                        suggestionBox.style.display = 'none';
-                    };
-                    suggestionBox.appendChild(suggestionItem);
-                    found = true;
-                    break;
-                }
+    let input = document.getElementById('searchInput').value.toLowerCase();
+    let suggestionBox = document.getElementById('suggestionBox');
+    suggestionBox.innerHTML = '';
+    let found = false;
+    charactersData.forEach(character => {
+        for (const lang in character.name) {
+            if (character.name[lang].toLowerCase().includes(input)) {
+                const suggestionItem = document.createElement('div');
+                suggestionItem.classList.add('suggestion-item');
+                suggestionItem.innerHTML = `<img src="${character.image}" alt="${character.name[lang]}"><span>${character.name[lang]}</span>`;
+                
+                
+                suggestionItem.onclick = function() {
+                    const characterId = character.name.en.replace(/\s/g, '');
+                    const targetElement = document.getElementById(characterId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                    suggestionBox.style.display = 'none';
+                };
+
+                suggestionBox.appendChild(suggestionItem);
+                found = true;
+                break;
             }
-        });
-        suggestionBox.style.display = found ? 'block' : 'none';
-    }
+        }
+    });
+    suggestionBox.style.display = found ? 'block' : 'none';
+}
+
     </script>
 </head>
 <body>
@@ -291,7 +299,7 @@
         <h3 style="color: #ffd700; font-style: italic; text-align: center;">Четвертий сезон</h3>
         <p class="highlighted">У четвертому сезоні Айнз, тепер визнаний беззаперечним правителем, продовжує своє прагнення розширити вплив Імперії Чаклуна. Його політичні інтриги та дипломатичні маневри стають складнішими, коли він зміцнює відносини з сусідніми королівствами та ворогами, які починають бачити його зростаючу силу як загрозу. Айнз стикається з новими викликами як внутрішніми, так і зовнішніми, прагнучи зберегти єдність Назаріка та отримати підтримку і повагу інших народів. Тим часом починають розкриватися нові таємниці та давні сили, змушуючи Айнза та його вірних охоронців приймати рішення, які визначать майбутнє всього світу.</p>
 
-        <div class="character">
+        <div class="character" id="AinzOoalGown">
             <h2>Айнз Ооал Гоун</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Ainz_Anime_Updated.png" alt="Айнз Ооал Гоун" onclick="openModal(this.src)">
             <p><strong>Характер:</strong> Спокійний, Розрахунковий</p>
@@ -300,7 +308,7 @@
             <p>Айнз — безсмертний архимаг та правитель Великої Гробниці Назарік. Він володіє величезною силою та ресурсами, що робить його майстром планування та передбачення, а також винятковим лідером.</p>
         </div>
 
-        <div class="character">
+        <div class="character" id="ShalltearBloodfallen">
             <h2>Шалтіра Бладфолен</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Shalltear_Anime_Updated.png" alt="Шалтіра Бладфолен" onclick="openModal(this.src)">
             <p><strong>Характер:</strong> Фанатична, Непередбачувана</p>
@@ -309,7 +317,7 @@
             <p>Шалтіра — одна з найсильніших охоронців, яка поклоняється і захоплюється Айнзом. Вона відома своєю безжальною природою та непередбачуваністю в бою.</p>
         </div>
 
-        <div class="character">
+        <div class="character" id="Albedo">
             <h2>Альбедо</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Albedo_Anime_Updated.png" alt="Альбедо" onclick="openModal(this.src)">
             <p><strong>Характер:</strong> Лояльна, Фанатична</p>
@@ -318,7 +326,7 @@
             <p>Альбедо — наглядачка охоронців, яка глибоко і одержимо кохає Айнза. Вона красива, розумна і надзвичайно лояльна до свого господаря.</p>
         </div>
 
-        <div class="character">
+        <div class="character" id="Demiurge">
             <h2>Деміург</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Demiurge_Anime_Updated.png" alt="Деміург" onclick="openModal(this.src)">
             <p><strong>Характер:</strong> Кмітливий, Раціональний</p>
@@ -327,7 +335,7 @@
             <p>Деміург — найрозумніший з охоронців з середніми бойовими здібностями. Його стратегічне мислення та здатність передбачати дії ворогів не мають рівних.</p>
         </div>
 
-        <div class="character">
+        <div class="character" id="NarberalGamma">
             <h2>Нарбераль Гамма</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Narberal_Gamma_Profile.png" alt="Нарбераль Гамма" onclick="openModal(this.src)">
             <p><strong>Характер:</strong> Холодна, Професійна</p>
@@ -336,7 +344,7 @@
             <p>Нарбераль Гамма — одна з бойових служниць Назаріка та вірний член Плеяд. Вона відома своїм холодним ставленням до людей та винятковими магічними здібностями, що робить її цінним помічником у битвах.</p>
         </div>
 
-        <div class="character">
+        <div class="character" id="YuriAlpha">
             <h2>Юрі Альфа</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Yuri_Alpha_V2.png" alt="Юрі Альфа" onclick="openModal(this.src)">
             <p><strong>Характер:</strong> Відповідальна, Спокійна</p>
@@ -345,7 +353,7 @@
             <p>Юрі Альфа є лідеркою групи бойових служниць Плеяд. Її обов'язок — координувати дії групи та підтримувати порядок. Вона відома своєю дисципліною, лояльністю та спокійною вдачею, що робить її авторитетом у групі.</p>
         </div>
 
-        <div class="character">
+        <div class="character" id="LupusreginaBeta">
             <h2>Лупусрегіна Бета</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Lupusregina_Beta.png" alt="Лупусрегіна Бета" onclick="openModal(this.src)">
             <p><strong>Характер:</strong> Шалена, Лояльна</p>
@@ -354,7 +362,7 @@
             <p>Лупусрегіна Бета — одна з Плеяд, відома своєю пустотливою натурою, що часто приховує її справжню лояльність і відданість Назаріку. Незважаючи на свою грайливу особистість, вона надзвичайно ефективна при виконанні своїх місій.</p>
         </div>
 
-        <div class="character">
+        <<div class="character" id="CZ2128Delta">
             <h2>ЦЗ2128 Дельта</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/CZ_Profile_V2.png" alt="ЦЗ2128 Дельта" onclick="openModal(this.src)">
             <p><strong>Характер:</strong> Тиха, Точна</p>
@@ -363,7 +371,7 @@
             <p>ЦЗ2128 Дельта є членом Плеяд, спеціалізується на стрільбі. Її спокійний і врівноважений характер робить її відмінним активом у операціях, що вимагають точності та контролю.</p>
         </div>
 
-        <div class="character">
+        <div class="character" id="SolutionEpsilon">
             <h2>Солюшн Епсилон</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Solution_Epsilon_Profile.png" alt="Солюшн Епсилон" onclick="openModal(this.src)">
             <p><strong>Характер:</strong> Хитра, Містична</p>
@@ -372,7 +380,7 @@
             <p>Солюшн Епсилон — одна з бойових служниць Назаріка, відома своїми здібностями до інфільтрації. Вона майстерно маніпулює противниками і швидко адаптується до ситуацій, що робить її грізною суперницею.</p>
         </div>
 
-        <div class="character">
+        <div class="character" id="EntomaVasilissaZeta">
             <h2>Ентома Василіса Дзета</h2>
             <img src="https://pimpek2220.github.io/OverLord-charakter/Pictures/Entoma_Profile.png" alt="Ентома Василіса Дзета" onclick="openModal(this.src)">
             <p><strong>Характер:</strong> Віддана, Спокійна</p>
